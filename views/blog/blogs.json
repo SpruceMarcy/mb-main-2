@@ -1,0 +1,41 @@
+{
+  "most_recent": 6,
+  "posts":{
+    "1":{
+      "id": 1,
+      "file": "1.html",
+      "title": "Metaneologophilia",
+      "desc": "If you've ever used a random word generator (like mine), then you'll know that a comprehensive dictionary contains a ton of random and obscure words that likely haven't been used for anything other than fleshing out the dictio..."
+    },
+    "2":{
+      "id": 2,
+      "file": "2.html",
+      "title": "Sandwiches",
+      "desc": "There is one topic that is more controversial than any other I dare dip my toe into, and that debate is regarding the definition of a sandwich. As a result, I must make it clear that this is an opinion piece and you are more than..."
+    },
+    "3":{
+      "id": 3,
+      "file": "3.html",
+      "title": "Denouements",
+      "desc": "The ending to a story is possibly the most important part. While a good story depends on the quality of every act, a bad ending can outright ruin any story's overall integrity. If you want to write a mediocre to good ending, then..."
+    },
+    "4":{
+      "id": 4,
+      "file": "4.html",
+      "title": "Recursion [MPMP 1]",
+      "desc": "This post references this video: https://www.youtube.com/watch?v=T29dydI97zY I recommend watching that before reading this post. Spoilers ahead for the solution to the problem in the..."
+    },
+    "5":{
+      "id": 5,
+      "file": "5.html",
+      "title": "Karnaugh Maps [MPMP 4]",
+      "desc": "The first thing I immediately noticed with this puzzle is that the state of whether each of the 4 cards are flipped is the equivalent to a 4 digit binary integer. From there there are a few key points that make the solution easy: 1) Flipping over a ..."
+    },
+    "6":{
+      "id": 6,
+      "file": "6.html",
+      "title": "Multiplying Matrices in your Head",
+      "desc": "Back when I was leaning how to multiply matrices, I struggled to memorise any formulas or methods to do it because I didn't quite understand what was happening. In the end, I found a way to visualise it in my mind..."
+    }
+  }
+}

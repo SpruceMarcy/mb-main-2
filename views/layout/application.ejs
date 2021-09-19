@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="msvalidate.01" content="7BFAB72892EDD0271CC0CC7B89664F3B" />
+    <meta name="google-site-verification" content="UOouO-FLDXINpgkCqGnVZtDeWC7nNwW6GEq6n9fWFhA" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=1.0, maximum-scale=10, minimum-scale=0">
+    <%if(include_recaptcha){%>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <%}%>
+    <title><%= page_title || "mxmbrook.co.uk"%></title>
+    <link type="text/css" rel='stylesheet' href='/css/reset.css' />
+    <link type="text/css" rel='stylesheet' href='/css/application.css' />
+    <link type="text/css" rel='stylesheet' href='/css/mobile.css' media="(max-width:768px)"/>
+    <%if(seasonal_style){%>
+    <link type="text/css" rel='stylesheet' href='/css/special/<%= seasonal_style%>>.css' />
+    <%}%>
+    <link rel="icon" href="/images/mco.png">
+  </head>
+
+  <body>
+    <header<%if(seasonal_text){%> title="<%=seasonal_text%>"<%}%>>
+      <a href="/"><img src="/images/mco.png" alt="logo"/></a>
+      <span>Marcy Brook</span>
+      <input type="checkbox" class="nav mobonly">
+      <nav>
+        <a href="/">Home</a>
+        <a href="/tools">Tools</a>
+        <a href="/blog">Blog</a>
+        <a href="/projects">Projects</a>
+        <a href="/about">About</a>
+      </nav>
+    </header>
+    <section class="content">
+      <%- body -%>
+      <footer>
+        <p>This page's content and template was written by Marcy Brook. <a href="/contact">Contact.</a> This site uses some cookies, but none of the horrifically unethical tracking cookies that require consent.</p>
+        <script> </script>
+      </footer>
+    </section>
+  </body>
+</html>

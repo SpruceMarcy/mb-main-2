@@ -1,11 +1,43 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Mxmbrook.co.uk is under construction.</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1>Mxmbrook.co.uk is under construction.</h1>
-    <p>Please bear with me as I move from rails to node.js and regret my life choices.</p>
-  </body>
-</html>
+<% page_title = "Home | Mxmbrook.co.uk"%>
+<% layout('layout/application') %>
+<article>
+  <h1>Welcome!</h1>
+  <p>Hi! I'm Marcy, and this is my website.</p>
+  <p class="adj">For all information, please visit the <a href="/about">about page</a>.</p>
+  <%if(is_admin){%>
+  <p class="adj">You are logged in as an admin. <a href="/admin">Click here for admin pages</a></p>
+  <%}%>
+</article>
+<main class="indexlayout">
+  <div>
+    <aside>
+      <h2>Quick Access</h2>
+      <p><a href="/">Home</a></p>
+      <p class="adj"><a href="/tools">Tools</a></p>
+      <p class="adj"><a href="/blog">Blog</a></p>
+      <p class="adj"><a href="/projects">Projects</a></p>
+      <p class="adj"><a href="/about">About</a></p>
+      <p class="adj"><a href="/contact">Contact</a></p>
+    </aside>
+    <aside>
+      <h2>What's New?</h2>
+      <%if(seasonal_text){%>
+      <h2>Today's Theme</h2>
+      <p><%=seasonal_text%></p>
+      <br/>
+      <%}%>
+      <h3>Dark Mode!</h3>
+      <p class="adj" style="font-size:1rem;">This site is now responsive to your system's colour theme! You can emulate this in firefox by adding the property ui.systemUsesDarkTheme to about:config with a value of 1. On chrome, you can emulate it by pressing Ctrl+Shift+I, then F1, and setting Preferences -> Rendering -> "Emulate CSS media feature prefers-color-scheme" to prefers-color-scheme:dark.</p>
+      <br/>
+      <h3>Latest Tool</h3>
+      <p class="adj" style="font-size:1rem;">Do you play Space Enineers? This tool will help you build mathematically correct circles!</p>
+      <p class="adj"><a href="/tools/SEcircle">Space Engineers Circle Generator</a></p>
+    </aside>
+  </div>
+  <article class="blog">
+    <h2>Latest Blog Post:</h2>
+    <br/>
+    <%- partial("blog/"+blog["file"])%>
+  </article>
+</main>
+

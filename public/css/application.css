@@ -1,0 +1,418 @@
+/*Written by Marcy Brook*/
+
+/*Default Colour variables*/
+:root{
+  --text-color: #000000;
+  --link-blue: blue;
+  --link-hover: darkblue;
+  --subtle-text-color: #585860;
+  --top-color: #fcfcfc;
+  --top-color-transparent: #ffffffbd;
+  --medium-color: whitesmoke;
+  --bottom-color: #eeeeee;
+  --shadow: #cacaca;
+  --shadow-transparent: #cacaca80;
+}
+/*Dark mode Colour variables*/
+@media (prefers-color-scheme:dark){
+  :root{
+    --text-color: #ddd;
+    --link-blue: #4c4cff;
+    --link-hover: #8888ff;
+    --subtle-text-color: #585860;
+    --top-color: #232323;
+    --top-color-transparent: #272727bd;
+    --medium-color: #1a1a1a;
+    --bottom-color: #111111;
+    --shadow: #080808;
+    --shadow-transparent: #08080880;
+  }
+}
+
+/*Controls font, text colour, and text align for whole document*/
+/*Sets Background colour*/
+body{
+    font-family: "helvetica neue", helvetica, arial, sans-serif;
+    background-color:var(--medium-color);
+    text-align:left;
+    color:var(--text-color);
+}
+/*Centers content in middle of page*/
+section.content{
+    max-width:1024px;
+    min-width:1024px;
+    margin:auto;
+}
+/*Index page only*/
+main.indexlayout{
+    grid-template-columns:17rem calc(100% - 17rem);
+    display:grid;
+}
+/*Styles of bar at top of screen*/
+header{
+    /*Keeps title and navbar at same height*/
+    display:flex;
+    /*Font size of navbar buttons*/
+    font-size: 1.1rem;
+    /*Shadow*/
+    box-shadow:0 0 2px var(--shadow);
+    /*Keeps header at top of screen*/
+    top:0;
+    position: sticky;
+    /*Whitespace around header content*/
+    padding:1.2rem 1rem;
+    /*Size*/
+    min-width:983px;
+    max-width:2048px;
+    /*Default colour*/
+    background-color:var(--top-color);
+}
+/*If blurred backgrounds are supported, make the header transparent*/
+@supports (backdrop-filter:blur(5px)){
+    header{
+        backdrop-filter:blur(5px);
+        background-color:var(--top-color-transparent);
+    }
+}
+/*Makes the logo highlight round*/
+header>a{
+    border-radius:100%;
+}
+/*Site Logo size & position*/
+header img{
+    vertical-align:top;
+    height:2rem;
+    margin:5px;
+}
+/*The Site title text*/
+header>span{
+    font-size: 2rem;
+    font-weight:bold;
+    margin: auto 0;
+}
+/*Positions the navbar*/
+nav{
+    margin-left:auto;
+    display:flex;
+}
+/*Styles links in navbar and buttons*/
+nav > a, button{
+    outline:none;
+    color:#6666d7;
+    background-color:transparent;
+    padding:0.3rem 0.5rem;
+    margin:auto 0.2rem;
+    border:0.07rem solid #6666d7;
+    border-radius:0.4rem;
+}
+/*Style when hovering over header links or buttons*/
+header a:hover, button:hover{
+    background-color:#6666d7;
+    border-color:#fff;
+    color:#fff;
+    text-decoration:none;
+}
+/*Inset shadow when buttons clicked*/
+nav a:active, button:active{
+    box-shadow: inset 1px 1px 5px #303030
+}
+/*Space between "login" and github svg*/
+nav > a * ~ *{
+    padding-left:4px;
+}
+/*Neatens the github profile pic*/
+nav a.img{
+    padding:0;
+    width:auto;
+}
+/*Change cursor so buttons look clickable*/
+button{
+    cursor:pointer;
+}
+/*Remove mozilla button click outlines*/
+*::-moz-focus-inner{
+    border:0;
+}
+/*The look of a card*/
+article, aside{
+    box-shadow:0 0 3px var(--shadow);
+    background-color:var(--top-color);
+    margin:8px 0px;
+    padding:15px;
+}
+/*Maintains the gap between aside and articles*/
+aside{
+    margin:8px;
+}
+/*Setting the layout of tool cards*/
+article.tool{
+    margin:8px 5%;
+    display:grid; 
+    grid-template-columns:calc(100% - 6rem) 6rem;
+}
+/*Stops text getting too close to the tool category marker*/
+article.tool div:nth-child(1){
+    margin-right:1rem;
+}
+/*Sets the tool category marker shape*/
+article.tool div:nth-child(2){
+    max-height:6rem;
+    border-radius:0.4rem;
+    text-align:center;
+    display:flex;
+}
+/*Positions and styles the text in the marker*/
+article.tool div:nth-child(2) p{
+    font-size:1rem;
+    color:whitesmoke;
+    font-weight: bold;
+    margin:auto; 
+}
+/*Sets the tool marker category colours*/
+article.tool.searchLinguistics div:nth-child(2){
+    background-color:#060;
+}
+article.tool.searchWebContent div:nth-child(2){
+    background-color:#066;
+}
+article.tool.searchCanvases div:nth-child(2){
+    background-color:#660;
+}
+article.tool.searchUniques div:nth-child(2){
+    background-color:#666;
+}
+/*Animations for searchable tool cards*/
+article.collapse{
+    transition: all 0.3s ease-out;
+}
+/*Makes blog and project cards a bit thinner*/
+article.blog,article.project{
+    margin:8px;
+    min-height:128px;
+}
+/*Project card image sizing and positioning*/
+article.project img{
+    width:100px;
+    float:left;
+    margin:14px;
+}
+/*The footer at the bottom of the page*/
+footer{
+    color: var(--subtle-text-color);
+    padding: 2vh 2%;
+    margin-top:2.5rem;
+    border-top:1px currentcolor solid;
+    width: 96%;
+}
+/*Allows centering of span contents*/
+span.centered{
+    display:inline-block;
+    text-align:center;
+    width:100%;
+}
+/*Spaces out checkboxes in a span*/
+span.checkboxes{
+    margin-top:0.4rem;
+    margin-bottom:0.8rem;
+    display:inline-block;
+}
+span.checkboxes label~label{
+    margin-left:4rem;
+}
+/*Allows the displaying of code (Used in blog)*/
+code{
+    display:block;
+    padding:0.5rem;
+    background-color:var(--bottom-color);
+    border-radius:0.2rem;
+    box-shadow:inset 0px 0px 4px #404040;
+    overflow:auto;
+    font-size:1.1rem;
+    font-family:monospace;
+    white-space: pre;
+}
+/*Figures, only used in about*/
+figure{
+    text-align:center;
+    margin-top:0.5em;
+    margin-bottom:0.5em;    
+}
+figure figcaption{
+    margin-top:0.2em;
+}
+figure img{
+    width:60%
+}
+img.logfig{
+    background-color:var(--medium-color);
+    border-radius:100%;
+}
+/*Titles that actually matter*/
+h1{
+    font-size:1.7em;
+    font-weight:bold;
+}
+/*Titles that don't matter*/
+h2{
+    font-size:1.5em;
+    font-weight:bold;
+}
+/*Subtitles*/
+h3, b{
+    font-size:1.2em;
+    font-weight:bold;
+}
+/*Stops checkboxes being awkwardly positioned*/
+input[type=checkbox]{
+    border: 0px;
+    width: 1rem;
+    height: 1rem;
+    vertical-align:middle;
+}
+/*Most text accross the site*/
+p, label{
+    line-height:1.25rem;
+    font-size:1.2rem;
+    margin:0.3em 0;
+}
+/*Default adjacency gap*/
+p ~ p, li{
+    margin-top:1.2rem;
+}
+/*Adjacency hack*/
+p.adj{
+    margin-top:0;
+}
+/*Avoid q tag content*/
+p.quote{
+    padding:0.6em 4em;
+    font-style:italic;
+}
+/*Standard inline link styles*/
+a{
+    text-decoration: none;
+    color:var(--link-blue);
+}
+a:hover{
+    color:var(--link-hover);
+    text-decoration:underline;
+}
+a:active{
+	background-color:#EEF;
+}
+/*Only used in about page*/
+ul *{
+    margin-left:1em;
+}
+/*Contact form styles*/
+form textarea{
+    min-width:97.5%;
+    max-width:97.5%;
+    min-height:10em;
+}
+form.contact textarea{
+    font-size:1.25rem;
+    margin-top:1rem;
+    font-family:inherit;
+    border-radius:0.6rem;
+    padding:0.7rem;
+}
+form.contact textarea:focus{
+    outline:none;
+    box-shadow: inset 0 0 5px #00F;
+}
+form.contact input[type="submit"]{
+    margin-top:0.5rem;
+}
+input[type="submit"]{
+    cursor:pointer;
+    /*height:100%;
+    border-width:2px;
+    border-radius:1rem;*/
+    font-size:1.2rem;
+    background-color:white;
+    outline:0;
+    line-height:normal;
+}
+input[type="text"]{
+    font-size:1.25rem;
+    font-family:inherit;
+    border-radius:0.3rem;
+    border-width:1.4px;
+}
+article.blog form>input[type="submit"], article.blog form>span{
+    margin:1rem;
+    display: block;
+}
+em.important{
+    font-weight:bold;
+    color:red;
+}
+ol{ 
+    margin-left:2rem;
+    list-style-type:decimal;
+}
+
+img.redimg{
+    width:512px;
+    border-width:5px;
+    border-style:solid;
+}
+.shaded{
+    background-color:#F9F9FB;
+}
+
+textarea.centered{
+    min-width:99%;
+    max-width:99%;
+    min-height:4rem;
+    text-align:left;
+}
+textarea.long{
+    min-height:15rem;
+}
+button.centered{
+    width:15rem;
+    height:3rem;
+    margin:auto auto;
+}
+.mobonly{
+    display:none;
+}
+.hidden{
+    display:none;
+}
+.note{
+    font-size:0.8em;
+    color:var(--text-color);
+}
+.rec{
+    display:flex;
+}
+a.rec *{
+    display:inline-block;
+}
+
+.shadowed{
+    border-style:solid;
+    border-color:white;
+}
+.shadowed:hover{
+    border-style:solid;
+    border-color:lightgrey;
+}
+.shadowed:active{
+    box-shadow: inset 1px 1px 20px #303030;
+}
+.unround{
+    border-radius:0;
+}
+.black{
+    color:black;
+}
+header, article, body, div~*{
+    transition-property: background-color, color, box-shadow;
+    transition-duration: 1s;
+    transition-delay: 0s;
+    transition-timing-function: linear;
+}

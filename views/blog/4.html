@@ -1,0 +1,70 @@
+<h1>Recursion [MPMP 1]</h1>
+<p class="note adj">Published 2020-03-25 23:58:39.014552 UTC</p>
+<p class="adj">This post references this video: <a href="https://www.youtube.com/watch?v=T29dydI97zY">https://www.youtube.com/watch?v=T29dydI97zY</a><br>
+    I recommend watching that before reading this post.
+    <br><br>
+    Spoilers ahead for the solution to the problem in the video.
+    <br><br>
+    So if you're like me, you came up with a trivial solution for all odd numbered setups by simply reversing the order of the people. Answering the puzzle after all, isn't really difficult; it's finding the general solution that is fun. I decided to put my computer science skills to use and make code that can be used to outright solve this problem for any number of seats.
+    <br><br>
+    Here is the code that I made:</p>
+<code># Code to produce all solutions to MPMP: Can you spin the table?
+    # Original video: https://www.youtube.com/watch?v=T29dydI97zY
+    # Written by Marcy Brook
+    # Copyright: Unlicence
+
+	def recursively_permute(array, func=print, max_depth=7):
+		if len(array)==max_depth:
+			func(array)
+		else:
+			for i in [x for x in range(1,max_depth+1) if x not in array]:
+				recursively_permute(array+[i],func,max_depth)
+            
+	class counter:
+		def verify(self, array):
+			for i in range(0,len(array)):
+				count=0
+				standard=list(range(i+1,len(array)+1))+list(range(1,i+1))
+				for j in range(0,len(array)):
+					if array[j]==standard[j]:
+						count+=1
+				if count!=1:
+					return 0
+			print(array)
+        
+    c=counter()
+    recursively_permute(func=c.verify,max_depth=7)
+</code>
+<p>
+    In basic terms, this python script checks every permutation of people sitting to see if this produces a solution where each spin position matches one person exactly.
+    <br><br>
+    This code makes a few assumptions about the problem when it is working it out, such as the fact that if a spin position matches nobody, then another spin position must match more than 1 person (pigeonhole principle).
+    <br><br>
+    To avoid "duplicate" solutions (ones where you can spin the table to make the other), it is always assumed that person one is in the right place. This is a safe assumption because by definition every solution must be able to be spun such that person one is in the right place and nobody else is. For example; while [7,6,5,4,3,2,1] is a valid solution, it is technically the same solution as [1,7,6,5,4,3,2] as the table can be rotated by one position to turn either one into the other.
+    <br><br>
+    This code, when run as is (max_depth=7), produces the output:</p>
+<code>[1, 3, 5, 7, 2, 4, 6]
+    [1, 3, 6, 2, 7, 5, 4]
+    [1, 3, 7, 6, 4, 2, 5]
+    [1, 4, 2, 7, 6, 3, 5]
+    [1, 4, 6, 3, 2, 7, 5]
+    [1, 4, 7, 2, 6, 5, 3]
+    [1, 4, 7, 3, 6, 2, 5]
+    [1, 4, 7, 5, 3, 2, 6]
+    [1, 5, 2, 6, 3, 7, 4]
+    [1, 5, 4, 2, 7, 3, 6]
+    [1, 5, 7, 3, 6, 4, 2]
+    [1, 6, 2, 5, 7, 4, 3]
+    [1, 6, 4, 2, 7, 5, 3]
+    [1, 6, 4, 3, 7, 2, 5]
+    [1, 6, 4, 7, 3, 5, 2]
+    [1, 6, 5, 2, 4, 7, 3]
+    [1, 7, 4, 6, 2, 5, 3]
+    [1, 7, 5, 3, 6, 2, 4]
+    [1, 7, 6, 5, 4, 3, 2]</code>
+<p>
+    Running this code for the first few odd numbers revealed that the number of solutions follows the sequence 1, 1, 3, 19, 225, 3441; which a quick search reveals is <a href="http://oeis.org/A003111">OEIS sequence A003111</a>.
+    <br><br>
+    Interestingly, the code does not output anything for even values. I didn't test every even number, but it seems like there must be some reason behind this that unfortunately I don't know due to doing it this way. If I were to speculate why; I'd say it was because if you try to just reverse the order as I did for the odd numbers, then the starting position creates two pairs at opposite sides of the table, so that probably has to happen at some point no matter the arrangement, but I can't prove that.
+    <br><br>
+    Either way; I hope you enjoyed, or maybe even learned something from this post! As with all code on this website, it is free to use and redistribute as per the Unlicence. Thanks for reading! </p>

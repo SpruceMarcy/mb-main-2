@@ -1,0 +1,21 @@
+<h1>Multiplying Matrices in your Head</h1>
+<p class="note adj">Published 2020-07-12 13:14:14.51187 UTC</p>
+<p class="adj">Back when I was leaning how to multiply matrices, I struggled to memorise any formulas or methods to do it because I didn't quite understand what was happening. In the end, I found a way to visualise it in my mind, and using that I became quite good at mentally multiplying two matrices together (as well as recognising if two matrices could be multiplied in the first place). The only problem was that it was a 3-dimentional visualisation, so I had no way to easily communicate how it worked.</p>
+<p>This tool below shows what is happening in my mind when I do matrix multiplication (or a "dot product" since they're functionally identical). I hope that by visualising it like this, I can help others more easily understand matrix multiplication</p>
+<p>Here's a step-by-step explanation of what's happening in the visualisation below:</p>
+<br/>
+<h3>Step 1</h3>
+<p class="adj">Begin with the matrices side-by-side, as you would denote them for a matrix multiplication.</p>
+<br/>
+<h3>Step 2</h3>
+<p class="adj">Position the second matrix so that the top edge of the first matrix and the left edge of the second matrix are adjacent, and the two matrices are perpendicular.</p>
+<br/>
+<h3>Step 3</h3>
+<p class="adj">Between the two matrices there is a space for a 3D grid of numbers, wherein each number has a corresponding value in each of the given matrices. Fill this grid in by multiplying together those numbers for each grid position.</p>
+<br/>
+<h3>Step 4</h3>
+<p class="adj">At the edge of the 3D grid to the right of the first matrix, make a new matrix wherein every "cell" is the sum of the row of numbers behind it. This final matrix is the result.</p>
+<p>If you're using this method in your head, keep in mind that the central 3D grid can be calculated in any order; so it helps to solve each row (and thereby each value in the final matrix) one at a time.</p>
+<br/>
+<h3>The Tool</h3>
+<p class="adj">You can find the tool at <a href="/tools/matrix">this linked page</a></p>
