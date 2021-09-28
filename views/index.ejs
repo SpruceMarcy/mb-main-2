@@ -1,43 +1,68 @@
 <% page_title = "Home | Mxmbrook.co.uk"%>
 <% layout('layout/application') %>
-<article>
-  <h1>Welcome!</h1>
-  <p>Hi! I'm Marcy, and this is my website.</p>
-  <p class="adj">For all information, please visit the <a href="/about">about page</a>.</p>
-  <%if(is_admin){%>
-  <p class="adj">You are logged in as an admin. <a href="/admin">Click here for admin pages</a></p>
-  <%}%>
-</article>
-<main class="indexlayout">
-  <div>
-    <aside>
-      <h2>Quick Access</h2>
-      <p><a href="/">Home</a></p>
-      <p class="adj"><a href="/tools">Tools</a></p>
-      <p class="adj"><a href="/blog">Blog</a></p>
-      <p class="adj"><a href="/projects">Projects</a></p>
-      <p class="adj"><a href="/about">About</a></p>
-      <p class="adj"><a href="/contact">Contact</a></p>
-    </aside>
-    <aside>
-      <h2>What's New?</h2>
-      <%if(seasonal_text){%>
-      <h2>Today's Theme</h2>
-      <p><%=seasonal_text%></p>
-      <br/>
-      <%}%>
-      <h3>Dark Mode!</h3>
-      <p class="adj" style="font-size:1rem;">This site is now responsive to your system's colour theme! You can emulate this in firefox by adding the property ui.systemUsesDarkTheme to about:config with a value of 1. On chrome, you can emulate it by pressing Ctrl+Shift+I, then F1, and setting Preferences -> Rendering -> "Emulate CSS media feature prefers-color-scheme" to prefers-color-scheme:dark.</p>
-      <br/>
-      <h3>Latest Tool</h3>
-      <p class="adj" style="font-size:1rem;">Do you play Space Enineers? This tool will help you build mathematically correct circles!</p>
-      <p class="adj"><a href="/tools/SEcircle">Space Engineers Circle Generator</a></p>
-    </aside>
-  </div>
-  <article class="blog">
-    <h2>Latest Blog Post:</h2>
-    <br/>
-    <%- partial("blog/"+blog["file"])%>
-  </article>
+<main>
+  <section class="hexgrid">
+    <a href="/blog">
+      <div>
+        <h1>Blog</h1>
+      </div>
+    </a>
+    <a href="/tools">
+      <div>
+        <h1>Tools</h1>
+      </div>
+    </a>
+    <a href="/projects">
+      <div>
+        <h1>Projects</h1>
+      </div>
+    </a>
+  </section>
 </main>
-
+<style>
+  .hexgrid{
+    width: calc(60vw*1.1547 + 0.8em);
+    max-width: calc(80vh*1.1547 + 0.8em);
+    margin: 1em auto;
+    display: grid;
+    grid-template-columns: auto auto;
+  }
+  .hexgrid>*>* {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+  }
+  header{
+    z-index: 100;
+  }
+  .hexgrid>* {
+    display: block;
+    position: relative;
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    background: linear-gradient(-30deg, rgba(0,181,179,0.75) 0%, rgba(80,80,159,0.75) 25%, rgba(167,104,182,0.75) 50%, rgba(62,114,215,0.75) 75%, rgba(0,212,255,0.75) 100%);
+    backdrop-filter: blur(5px);
+    width: calc(30vw*1.1547);
+    height: 30vw;
+    max-width: calc(40vh*1.1547);
+    max-height: 40vh;
+    color: #222;
+    margin: 0.2em;
+    transition: transform .2s; /* Animation */
+  }
+  .hexgrid>*:nth-child(2n){
+    transform: translate(calc(-12.5%),calc(50% + 0.2em));
+  }
+  .hexgrid>*:nth-child(2n):hover {
+    transform: translate(calc(-12.5%),calc(50% + 0.2em)) scale(1.2);
+    z-index: 1;
+  }
+  .hexgrid>*:nth-child(2n+1){
+    transform: translate(calc(12.5%),0%);
+  }
+  .hexgrid>*:nth-child(2n+1):hover {
+    transform: translate(calc(12.5%),0%) scale(1.2);
+    z-index: 1;
+  }
+</style>
