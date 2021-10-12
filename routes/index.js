@@ -26,4 +26,22 @@ router.get('/blog/:id/?', function(req, res, next) {
   res.render('blog/show', opts);
 });
 
+router.get('/about', function(req, res, next) {
+  let opts = getOpts();
+  res.render('about', opts);
+});
+
+router.get('/twitter', function(req, res, next) {
+  let opts = getOpts();
+  res.redirect('https://twitter.com/mxmbrook');
+});
+router.get('/linkedin', function(req, res, next) {
+  let opts = getOpts();
+  res.redirect('https://www.linkedin.com/in/marcy-brook-9a410017a/',);
+});
+router.get('/github', function(req, res, next) {
+  let opts = getOpts();
+  res.redirect('https://github.com/SpruceMarcy');
+});
+
 module.exports = router;
