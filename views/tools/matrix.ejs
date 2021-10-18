@@ -54,21 +54,21 @@
       <div class="titles">
         <p>Matrix 1</p>
         <div class="inputgrid">
-        <%for y in 0..3%>
-        <%for x in 0..3%>
-        <input type="number" id="i<%=x.to_s+"_"+y.to_s%>"></input>
-        <%end%>
-        <%end%>
+          <%for (var y = 0; y <= 3; y++) {%>
+            <%for (var x = 0; x <= 3; x++) {%>
+        <input type="number" id="i<%=x.toString()+"_"+y.toString()%>"></input>
+            <%}%>
+          <%}%>
         </div>
       </div>
       <div class="titles">
         <p>Matrix 2</p>
         <div class="inputgrid">
-        <%for y in 0..3%>
-        <%for x in 0..3%>
-        <input type="number" id="j<%=x.to_s+"_"+y.to_s%>"></input>
-        <%end%>
-        <%end%>
+          <%for (var y = 0; y <= 3; y++) {%>
+            <%for (var x = 0; x <= 3; x++) {%>
+          <input type="number" id="j<%=x.toString()+"_"+y.toString()%>"></input>
+            <%}%>
+          <%}%>
         </div>
       </div>
     </div>
