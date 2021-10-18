@@ -41,6 +41,7 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
+// layout parameters! - custom
 global.getOpts = function(){
   let opts = {};
   opts["is_admin"]=false;
