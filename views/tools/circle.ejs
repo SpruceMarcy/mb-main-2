@@ -1,0 +1,35 @@
+<% page_title = "Space Engineers Circle Generator | Mxmbrook.co.uk"%>
+<% layout('../layout/application') %>
+<article style="margin:8px auto;width:auto; display:table;vertical-align:middle;">
+  <h1>Space Engineers Circle Generator</h1>
+  <span>
+    <input id="selectcircle" type="radio" name="cicletype" value="Circle" checked/><p style="display:inline-block">Circle</p>
+    <input id="selectellipse" type="radio" name="cicletype" value="Ellipse"/><p style="display:inline-block">Ellipse</p>
+  </span>
+  <div>
+    <label for="widthslider">Width:</label>
+    <input id="widthslider" type="range" min="2" max="40" value="20" step="1">
+    <input id="widthbox" type="number" min="2" max="40" value="20" step="1" style="width:5rem">
+  </div>
+  <div id="heightoptions">
+    <label for="heightslider">Height:</label>
+    <input id="heightslider" type="range" min="2" max="40" value="20" step="1">
+    <input id="heightbox" type="number" min="2" max="40" value="20" step="1" style="width:5rem">
+  </div>
+  <div>
+    <button id="gen">Generate</button>
+    <button id="resetview">Reset View</button>
+  </div>
+  <div>
+    <canvas id="canvas1" width="512" height="512" style="padding:1rem 0"></canvas>
+    <p>Click and drag to pan. Scroll to zoom</p>
+    <h3>Key</h3>
+    <div>
+      <div style="display:inline-block;width:1rem;height:1rem;background-color:red;"></div><p style="display:inline-block">Center</p>
+    </div>
+    <div>
+      <div style="display:inline-block;width:1rem;height:1rem;background:linear-gradient(135deg, rgba(0,0,0,0) 49%,rgba(0,0,255,0.5) 51%);"></div><p class="adj" style="display:inline-block">Block</p>
+    </div>
+  </div>
+  <script src="/javascripts/circle.js"></script>
+</article>
