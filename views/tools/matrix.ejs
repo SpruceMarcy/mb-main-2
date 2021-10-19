@@ -31,8 +31,15 @@
   *:disabled:active{
     box-shadow:none;
   }
-  .controls>*{
-    display:block;
+  .controls>* {
+    display: block;
+  }
+  .controls{
+    text-align: center;
+  }
+  .controls>div{
+    margin: auto auto;
+    width: fit-content;
   }
 </style>
 <article>
@@ -72,7 +79,8 @@
         </div>
       </div>
     </div>
-    <span>
+    <span style="margin-bottom: 12px">
+      <button id="populate">Random Matrices</button>
       <button id="reset">Step 1 (Reset)</button>
       <button id="1,2">Step 2</button>
       <button id="2,3" disabled>Step 3</button>
@@ -379,7 +387,27 @@
     function c3(){mainCam.animateTo([-m12/2+1,-1,-m2v/2-1],[-m12/2,0,-m2v/2],2*Math.max(m1v,m12,m2v),60)}
     function c4(){mainCam.animateTo([1,0,-m2v/1.5],[0,0,-m2v/1.5],2*Math.max(m1v,m12,m2v),60)}
     //==================FUNCTIONALITY==================//
-    
+
+    function getRndInteger(min, max) {
+      return Math.floor(Math.random() * (max - min) ) + min;
+    }
+
+    $("populate").addEventListener("click",function(){
+
+      for(var x = 0; x < 4; x++){
+        for(var y = 0; y < 4; y++){
+          var thisInput1 = $("i"+y+"_"+x);
+          var thisInput2 = $("j"+y+"_"+x);
+          if(!thisInput1.disabled){
+            thisInput1.value = getRndInteger(0,10);
+          }
+          if(!thisInput2.disabled){
+            thisInput2.value = getRndInteger(0,10);
+          }
+        }
+      }
+    })
+
     $("1,2").addEventListener("click",function(){
       if($("ac").checked){$("c2").checked=true;c2()}
       for(let row in m2cubes){
