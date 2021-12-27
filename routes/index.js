@@ -3,15 +3,6 @@ let router = express.Router();
 let fs = require('fs');
 let blogs = JSON.parse(fs.readFileSync('views/blog/blogs.json'));
 
-/* to be moved */
-router.get('/tools/uwu', function(req, res, next) {
-  let opts = getOpts();
-  res.render('tools/uwu', opts);
-});
-
-
-
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
   let opts = getOpts();
