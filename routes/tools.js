@@ -63,5 +63,8 @@ router.get('/vic', function(req, res, next) {
   let opts = getOpts();
   res.render('tools/vic', opts);
 });
-
+router.get('/phylogenetic_tree_editor',function (req, res, next){
+  let opts = getOpts();
+  res.render('tools/phylogeny',opts)
+});
 module.exports = router;
