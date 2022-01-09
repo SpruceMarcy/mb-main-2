@@ -8,7 +8,7 @@ function drawLine(x1,y1,x2,y2,width,colour){
 	context.strokeStyle=colour;
 	context.lineWidth=width*scale;
 	context.moveTo(x1*scale,y1*scale);
-        context.lineTo(x2*scale,y2*scale);
+	context.lineTo(x2*scale,y2*scale);
 	context.closePath();
 	context.stroke();
 }
