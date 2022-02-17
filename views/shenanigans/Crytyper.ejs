@@ -1,0 +1,19 @@
+<% page_title = "Crytyper | Mxmbrook.co.uk"%>
+<% breadcrumb = "Crytyper"%>
+<% layout('layout/shenanigans') %>
+<article id="Crytyper">
+  <h1>Crytyper</h1>
+  <p>Enter text into the top box, then press "Translate" to crytype it.</p>
+  <br/>
+  <label for="CrytyperMagnitude"> Effect Magnitude</label>
+  <input id="CrytyperMagnitude" type="range" min="0" max="200" value="50">
+  <br/>
+  <br/>
+  <textarea id="CrytyperInput" class="centered fillWidth verticalResize minH-lg"></textarea>
+  <button id="CrytyperTranslate" class="centered btn-lg">Translate</button>
+  <textarea id="CrytyperOutput" class="centered fillWidth verticalResize minH-lg"></textarea>
+  <br/>
+  <p>This tool was inspired by <a href="https://imgur.com/BHakB0g">this text</a>, from <a href="https://youtu.be/fS4X1JfX6_Q">this video</a>.</p>
+  <p>The methodology was taken from an inspection of <a href="https://becca.ooo/crytyper/">Rebecca Turner's crytyper</a>, but written entirely by me.</p>
+  <script src="/javascripts/Crytyper.js"></script>
+</article>

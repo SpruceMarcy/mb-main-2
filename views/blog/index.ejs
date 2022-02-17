@@ -5,10 +5,11 @@
     <h1>Blog</h1>
     <p>This is where I write about any topics I may want to reference in the future. There is no schedule for posts, and anything goes! Newest posts are at the top.</p>
 </article>
-<%for(let id in blogs){let entry = blogs[id];%>
+<hr/>
+<%for(let blog of Object.keys(blogs).reverse()){let entry = blogs[blog];%>
 <article class="blog">
     <h2><%=entry["title"]%></h2>
-    <p class="adj"><%=entry["desc"]%>...</p>
+    <p><%=entry["desc"]%>...</p>
     <p><a href="/blog/<%=entry["id"]%>">Continue Reading ─></a></p>
 </article>
 <%}%>

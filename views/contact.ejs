@@ -1,0 +1,26 @@
+<% page_title = "Contact | Mxmbrook.co.uk"%>
+<% layout('layout/application') %>
+<article>
+  <h1>Contact Me</h1>
+  <p><em>Important Notice:</em></p>
+  <p>This form is anonymous. If you wish to receive a direct response of any kind, remember to leave some form of contact information (such as an email address).</p>
+  <br/>
+  <form id="contactForm" method="post">
+    <textarea name="message" class="centered fillWidth verticalResize minH-lg" placeholder="Enter your message here, then press submit." required></textarea>
+    <div class="g-recaptcha" data-sitekey="6Ld-lJsUAAAAAAadCbjpU9pDthxmC3KBwJfZwAUh"></div>
+    <input type="submit" value="Submit"/>
+  </form>
+  <script>
+    //Uwu what's this? Just gotta get a bit of info from ya.
+    //People are terrible at actually including context in their
+    //messages so I gotta do it myself :)
+    document.getElementById("contactForm").onsubmit=function(){
+      let data=document.createElement("input")
+      data.setAttribute("type","hidden")
+      data.setAttribute("name","browser")
+      let serialData="AppCodeName: "+navigator.appCodeName+" | AppName: "+navigator.appName+" | AppVersion: "+ navigator.appVersion+" | Lang: "+navigator.language+" | Platform: "+navigator.platform+" | UserAgent: "+navigator.userAgent+" | Product: "+navigator.product+" | Referrer: "+document.referrer
+      data.setAttribute("value",serialData)
+      document.getElementById("contactForm").appendChild(data)
+    }
+  </script>
+</article>

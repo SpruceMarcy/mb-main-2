@@ -1,5 +1,7 @@
 let express = require('express');
 let router = express.Router();
+const request = require('request');
+const nodemailer = require('nodemailer');
 let fs = require('fs');
 let blogs = JSON.parse(fs.readFileSync('views/blog/blogs.json'));
 
@@ -8,6 +10,57 @@ router.get('/', function(req, res, next) {
   let opts = getOpts();
   res.render('index', opts);
 });
+
+/* GET contact page. */
+router.get('/contact', function(req, res, next) {
+  let opts = getOpts();
+  opts["include_recaptcha"] = true
+  res.render('contact', opts);
+});
+/* POST contact page. */
+router.post('/contact', function(req, res, next) {
+  let opts = getOpts();
+  request("https://www.google.com/recaptcha/api/siteverify?secret=" + process.env.reCAPTCHA_secret
+      + "&response=" + req.body['g-recaptcha-response']
+      + "&remoteip=" + req.socket.remoteAddress,function(error,response,body) {
+    let parsedBody = JSON.parse(body);
+    if(parsedBody.success !== undefined && !parsedBody.success) {
+      res.status(401);
+      res.locals.error = { "status" : 401}
+      res.locals.ip = req.socket.remoteAddress
+      res.render('error',getOpts())
+      return;
+    }
+    let transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 587,
+      secure:false,
+      requireTLS:true,
+      auth: {
+        user: process.env.FORM_EMAIL,
+        pass: process.env.FORM_PASSWORD
+      }
+    });
+    let mailOptions = {
+      from: 'contact.form@mxmbrook.co.uk',
+      to: 'mdr.brook@gmail.com',
+      subject: "Mxmbrook.co.uk Contact Form Response",
+      text: "IP Address: " + req.socket.remoteAddress + " | " + req.body.browser+"\n\n"+req.body.message
+    };
+
+    transporter.sendMail(mailOptions, function(error, info){
+      if (error) {
+        console.log(error);
+        res.render('contactSent', opts);
+      } else {
+        res.render('contactSent', opts);
+      }
+    });
+
+  });
+});
+
+
 
 /*GET blog page*/
 router.get('/blog', function(req, res, next) {
@@ -27,6 +80,29 @@ router.get('/about', function(req, res, next) {
   let opts = getOpts();
   res.render('about', opts);
 });
+
+router.get('/master', function(req, res, next) {
+  if(req.socket.remoteAddress === "::1"){
+    let opts = getOpts();
+    opts["tools"] = []
+    fs.readdir("views/tools/", (err, files) => {
+      if (err) {
+        throw err;
+      }
+      files.forEach(file => {
+        opts["tools"].push(file);
+      });
+      res.render('master', opts);
+    });
+  }else{
+    res.status(403);
+    res.locals.error = { "status" : 403}
+    res.locals.ip = req.socket.remoteAddress
+    res.render('error',getOpts())
+  }
+});
+
+//redirects
 
 router.get('/twitter', function(req, res, next) {
   let opts = getOpts();

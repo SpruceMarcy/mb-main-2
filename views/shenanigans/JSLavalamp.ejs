@@ -1,0 +1,31 @@
+<% page_title = "Lava Lamp | Mxmbrook.co.uk"%>
+<% breadcrumb = "Lava Lamp"%>
+<% layout('layout/shenanigans') %>
+<style>
+  #LavalampBounds{
+    width:100%;
+    height:95%;
+    background-image:linear-gradient(90deg, #11001d, #000022, #11001d);
+  }
+  #LavalampCanvas{
+    filter:url(#LavaLampFilter);
+  }
+</style>
+<article id="JSLavalamp" style="height:512px;">
+  <h1>Lava Lamp</h1>
+  <br/>
+  <div id="LavalampBounds">
+    <svg version="1.1" style="display:none;">
+      <defs>
+        <filter id="LavaLampFilter">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur"></feGaussianBlur>
+          <feComponentTransfer>
+            <feFuncA type="discrete" tableValues="0 1"></feFuncA>
+          </feComponentTransfer>
+        </filter>
+      </defs>
+    </svg>
+    <canvas id="LavalampCanvas" height="100px" width="100px"></canvas>
+  </div>
+  <script src="/javascripts/JSLavalamp.js"></script>
+</article>

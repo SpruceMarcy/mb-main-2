@@ -1,10 +1,22 @@
 <% page_title = "Error | Mxmbrook.co.uk"%>
 <% layout('layout/application') %>
-<%if(error.status==404){%>
+<%if(error.status===404){%>
     <article>
         <h1>Error <%= error.status %></h1>
         <h2>Page not found.</h2>
         <p>If this page previously worked, then it is likely temporarily down due to a shift from rails to node.js. Please bear with me as I reimplement more sections.</p>
+    </article>
+<%}else if(error.status===403){%>
+    <article>
+        <h1>Error <%= error.status %></h1>
+        <h2>Forbidden.</h2>
+        <p>You do not have permission to view this page. Unauthorized IP: <%= ip%></p>
+    </article>
+<%}else if(error.status===401){%>
+    <article>
+        <h1>Error <%= error.status %></h1>
+        <h2>Unauthorized.</h2>
+        <p>You did not have permission to make that request. Unauthorized IP: <%= ip%></p>
     </article>
 <%}else{%>
     <article>

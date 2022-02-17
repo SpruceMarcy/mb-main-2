@@ -1,0 +1,50 @@
+<% page_title = "Vic-20 Character Art Editor | Mxmbrook.co.uk"%>
+<% breadcrumb = "Vic-20 Character Art Editor"%>
+<% layout('layout/tools') %>
+<article id="Vic20ArtEditor">
+  <h1>Vic-20 Character Art Editor</h1>
+  <p>Select the boxes below to draw an image. Click "Generate" to turn the image into a series of 8 8-bit numbers.</p>
+  <br/>
+  <table id="pixelArt">
+    <%for (let y = 0; y < 8; y++) {%>
+    <tr>
+      <%for (let x = 0; x < 8; x++) {%>
+      <td>
+        <input type="checkbox" id="<%=x.toString()+y.toString()%>" value="Apple">
+      </td>
+      <%}%>
+    </tr>
+    <%}%>
+  </table>
+  <br/>
+  <button id="VicGenerate">Generate</button>
+  <br/>
+  <input type="text" id="VicOutput">
+  <script src="/javascripts/Vic20ArtEditor.js"></script>
+  <style>table#pixelArt{
+    border-collapse: collapse;
+    border:1px solid black;
+}
+table#pixelArt tr{
+    line-height:19px;
+    height:19px
+}
+table#pixelArt td{
+    line-height:19px;
+    height:19px;
+    border:0.5px solid black;
+    padding:0;
+}
+table#pixelArt td input{
+    margin:0;
+    -webkit-appearance:none;
+    background-color:lightgray;
+    width:19px;
+    height:19px;
+    outline:0;
+    display:block;
+}
+table#pixelArt td input:checked{
+    background-color:black;
+}</style>
+</article>

@@ -1,0 +1,15 @@
+<% page_title = "Dithering Demonstration | Mxmbrook.co.uk"%>
+<% breadcrumb = "Dithering Demonstration"%>
+<% layout('layout/tools') %>
+<article id="Dithering">
+  <h1>Dithering Demonstration</h1>
+  <p>Move the slider to change the square size.</p>
+  <p>Note how the distinct red and blue squares seem to create an appearance of purple when small.</p>
+  <br/>
+  <label for="DitheringInput"> Effect Magnitude</label>
+  <input id="DitheringInput" type="range" min="0" max="8" value="1" step="1">
+  <br/>
+  <br/>
+  <canvas id="DitheringCanvas" class="fillWidth" height="512"></canvas>
+  <script src="/javascripts/DitheringDemonstration.js"></script>
+</article>

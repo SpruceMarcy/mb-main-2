@@ -5,66 +5,24 @@ router.get('/', function(req, res, next) {
   let opts = getOpts();
   res.render('tools/index', opts);
 });
-
-router.get('/alpaca', function(req, res, next) {
+router.get('/SECircle', function(req, res, next) {
   let opts = getOpts();
-  res.render('tools/alpaca', opts);
+  res.render('tools/SECircle', opts);
 });
-
-router.get('/bean', function(req, res, next) {
+router.get('/Dithering', function(req, res, next) {
   let opts = getOpts();
-  res.render('tools/bean', opts);
+  res.render('tools/DitheringDemonstration', opts);
 });
-
-router.get('/cells', function(req, res, next) {
+router.get('/Matrix', function(req, res, next) {
   let opts = getOpts();
-  res.render('tools/cells', opts);
+  res.render('tools/MatrixMultiplication', opts);
 });
-
-router.get('/SEcircle', function(req, res, next) {
+router.get('/Vic20ArtEditor', function(req, res, next) {
   let opts = getOpts();
-  res.render('tools/circle', opts);
+  res.render('tools/Vic20ArtEditor', opts);
 });
-
-router.get('/crytyper', function(req, res, next) {
+router.get('/Phylogenetic_Tree_Editor',function (req, res, next){
   let opts = getOpts();
-  res.render('tools/crytyper', opts);
-});
-
-router.get('/dithering', function(req, res, next) {
-  let opts = getOpts();
-  res.render('tools/dither', opts);
-});
-
-router.get('/lavalamp', function(req, res, next) {
-  let opts = getOpts();
-  res.render('tools/lavalamp', opts);
-});
-
-router.get('/matrix', function(req, res, next) {
-  let opts = getOpts();
-  res.render('tools/matrix', opts);
-});
-router.get('/sarcasm', function(req, res, next) {
-  let opts = getOpts();
-  res.render('tools/sarcasm', opts);
-});
-router.get('/settings', function(req, res, next) {
-  let opts = getOpts();
-  res.render('tools/settings', opts);
-});
-
-router.get('/uwu', function(req, res, next) {
-  let opts = getOpts();
-  res.render('tools/uwu', opts);
-});
-
-router.get('/vic', function(req, res, next) {
-  let opts = getOpts();
-  res.render('tools/vic', opts);
-});
-router.get('/phylogenetic_tree_editor',function (req, res, next){
-  let opts = getOpts();
-  res.render('tools/phylogeny',opts)
+  res.render('tools/Phylogeny',opts)
 });
 module.exports = router;

@@ -9,7 +9,6 @@
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <%}%>
     <title><%= page_title || "mxmbrook.co.uk"%></title>
-    <link type="text/css" rel='stylesheet' href='/css/reset.css' />
     <link type="text/css" rel='stylesheet' href='/css/application.css' />
     <link type="text/css" rel='stylesheet' href='/css/mobile.css' media="(max-width:768px)"/>
     <%if(seasonal_style){%>
@@ -20,18 +19,18 @@
 
   <body>
     <header<%if(seasonal_text){%> title="<%=seasonal_text%>"<%}%>>
-      <a href="/"><img src="/images/mco.png" alt="logo"/></a>
-      <span>Marcy Brook</span>
-      <input type="checkbox" class="nav mobonly">
+      <a id="logo" href="/"><img src="/images/mco.png" alt="logo"/></a>
+      <span id="siteTitle">Marcy Brook</span>
+      <input type="checkbox" class="mobileOnly">
       <nav>
-        <a href="/">Home</a>
-        <a href="/tools">Tools</a>
-        <a href="/blog">Blog</a>
-        <a href="/projects">Projects</a>
-        <a href="/about">About</a>
+        <a href="/" class="btn-1">Home</a>
+        <a href="/tools" class="btn-1">Tools</a>
+        <a href="/shenanigans" class="btn-1">Shenanigans</a>
+        <a href="/projects" class="btn-1">Projects</a>
+        <a href="/about" class="btn-1">About</a>
       </nav>
     </header>
-    <section class="content">
+    <section id="content">
       <%- body -%>
       <footer>
         <p>This page's content and template was written by Marcy Brook. <a href="/contact">Contact.</a> This site uses some cookies, but none of the horrifically unethical tracking cookies that require consent.</p>

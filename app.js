@@ -6,6 +6,8 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var toolsRouter = require('./routes/tools');
+var shenanigansRouter = require('./routes/shenanigans')
+var projectsRouter = require('./routes/projects')
 
 var app = express();
 
@@ -22,6 +24,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/tools', toolsRouter);
+app.use('/shenanigans', shenanigansRouter);
+app.use('/shenans', shenanigansRouter);
+app.use('/nans',shenanigansRouter)
+app.use('/projects',projectsRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -44,7 +50,6 @@ module.exports = app;
 // layout parameters! - custom
 global.getOpts = function(){
   let opts = {};
-  opts["is_admin"]=false;
   opts["seasonal_text"]="";
   opts["seasonal_style"]=false;
   opts["page_title"]=false;

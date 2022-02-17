@@ -264,11 +264,11 @@ function resetView(){
 	drawAll();
 }
 function handleScroll(event){
-	oldscale   = scale
+	let oldscale   = scale
 	scale     -= (event.deltaY / Math.abs(event.deltaY)) * 0.2;
 	scale      = scale > 0.5 ? scale : 0.5;
 	scale      = scale < 20 ? scale : 20;
-	offset[0]  = (offset[0]-256)*(scale/oldscale)+256
+	offset[0]  = (offset[0]-(canvasWidth/2))*(scale/oldscale)+(canvasWidth/2)
 	offset[1]  = (offset[1]-256)*(scale/oldscale)+256
 	drawAll()
 	event.preventDefault();
@@ -285,14 +285,20 @@ function nextFrame(){
 function resetValues(){
 	canvas1       = $("canvas1");
 	context       = canvas1.getContext("2d");
-	canvasHeight  = canvas1.height;
-	canvasWidth   = canvas1.width;
+	resizeCanvas()
 	scale         = 1.0;
 	offset        = [0,0]
 	gridOrigin    = {"x":0,"y":0}
 	generatedGrid = 0;
 	isDragging    = false;
 }
+function resizeCanvas(){
+	canvas1.height= 512
+	canvasHeight  = canvas1.height;
+	canvas1.width = canvas1.clientWidth;
+	canvasWidth   = canvas1.width;
+}
+
 
 //Declaration of all global variables
 var canvas1			//The canvas element
@@ -330,6 +336,7 @@ $("canvas1").addEventListener("mousemove",function(e){if(isDragging){
 	drawAll()
 }})
 document.addEventListener("mouseup",function(){isDragging=false})
+window.addEventListener("resize",function(){resizeCanvas();generate()})
 
 handleTypeSelection();
 generate();

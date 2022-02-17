@@ -1,171 +1,72 @@
 <% page_title = "Tools | Mxmbrook.co.uk"%>
-<% layout('layout/application') %>
+<% breadcrumb = false%>
+<% layout('layout/tools') %>
 <article>
   <h1>Web Tools</h1>
   <p>These "Tools" are applications that can be run in-browser. Each page will have a form or interface to use the tool, no download required.</p>
-  <p class="adj">Unlike my <a href="/projects/">Projects</a>, in most cases the source code will not be readily downloadable, and may be integrated into the site itself. You can try searching through the repository for this site if you want to see how something works.</p>
+  <p>Unlike my <a href="/projects/">Projects</a>, in most cases the source code will not be readily downloadable, and may be integrated into the site itself. You can try searching through the repository for this site if you want to see how something works.</p>
   <p>This site also has an interactive element to it. If you want to check out other styles, click here: <a href="/tools/settings">Session Settings</a></p>
 </article>
-<style>
-  .searchResults article{
-    margin-bottom:8px;
-  }
-  *.searchHidden *, *.searchHidden{
-    margin-bottom:0 !important;
-    margin-top:0 !important;
-    padding-bottom:0 !important;
-    padding-top:0 !important;
-    visibility:hidden;
-  }
-  *.searchHidden{
-    height:48px;
-  }
-  *.searchHidden *{
-    height:0px;
-  }
-  *.searchHidden + article{
-    margin-top:-48px !important;
-  }
-</style>
-<script>
-            //Written by Marcy Brook
-            function update(){
-                var searchString = document.getElementById("search").value.toLowerCase();
-                for(var article of document.getElementsByClassName("collapse")){
-                    title = article.getElementsByTagName("h2")[0].innerHTML.toLowerCase()
-                    if(title.includes(searchString)
-                       && document.getElementById(article.classList[2]).checked
-                      ){
-                        article.classList.remove('searchHidden');
-                    }
-                    else{
-                        article.classList.add('searchHidden');
-                    }
-                }
-            }
-</script>
-<article>
-  <h2>Search</h2>
-  <p><input type="text" id="search" oninput="update()"></p>
-  <span>
-    <input type="checkbox" id="searchLinguistics" oninput="update()" checked><Label for="searchLinguistics">Linguistics</Label>
-    <input type="checkbox" id="searchWebContent" oninput="update()" checked><Label for="searchWebContent">Web Content</Label>
-    <input type="checkbox" id="searchCanvases" oninput="update()" checked><Label for="searchCanvases">Canvases</Label>
-    <input type="checkbox" id="searchUniques" oninput="update()" checked><Label for="searchUniques">Unique</Label>
-  </span>
+<hr/>
+<article class="grid" style="grid-template-columns: auto min-content">
+  <div style="position: relative">
+    <h2>Phylogenetic Tree Editor</h2>
+    <p>Interactively build and edit custom phylogenetic trees/dendrograms in-browser.</p>
+    <br/>
+    <p>Proposing a new phylogeny or describing a current one can significantly benefit from a visual aid, but it can be tedious drawing out whole trees. This tool takes the legwork out of that process, making it possible to add or remove branches at the click of a button. Trees can be saved as a .png, .svg, or as a json file to upload and edit later.</p>
+    <br/>
+    <br/>
+    <br/>
+    <a class="btn-1 btn-call-to-action" href="/tools/Phylogenetic_Tree_Editor">Phylogenetic Tree Editor →</a>
+  </div>
+  <img src="/images/PhylogeneticTreeEditorLogo.png">
 </article>
-<div class="searchResults">
-  <article class="tool collapse searchLinguistics">
-    <div>
-      <h2>UwU Translator</h2>
-      <p>This page will translate text into "UwU speak". Apologies in advance.</p>
-      <p class="adj">E.g. wowem ipsum dowow sit amet, consectetuw uwu adipiscing ewit</p>
-      <p><a href="/tools/uwu">UwU Translator</a></p>
-    </div>
-    <div>
-      <p>Linguistics</p>
-    </div>
-  </article>
-  <article class="tool collapse searchLinguistics">
-    <div>
-      <h2>Crytyper</h2>
-      <p>This page will translate text into "Crytype".</p>
-      <p class="adj">E.g. Loremi psum d..o,,lor st.i amet, consect.etu radipiscing elit</p>
-      <p><a href="/tools/crytyper">Crytyper</a></p>
-    </div>
-    <div>
-      <p>Linguistics</p>
-    </div>
-  </article>
-  <article class="tool collapse searchLinguistics">
-    <div>
-      <h2>Sarcastic Case Converter</h2>
-      <p>This page will translate text into "Mocking Case".</p>
-      <p class="adj">E.g. LOreM IPsUm dOlOR sIt AmeT, ConSECTETuR ADiPIscInG ELit</p>
-      <p><a href="/tools/sarcasm">Sarcastic Case Converter</a></p>
-    </div>
-    <div>
-      <p>Linguistics</p>
-    </div>
-  </article>
-  <article class="tool collapse searchCanvases">
-    <div>
-      <h2>JavaScript Dithering Example</h2>
-      <p>This grid of red and blue squares appears purple when the squares are small enough.</p>
-      <p><a href="/tools/dithering">JavaScript Dithering Example</a></p>
-    </div>
-    <div>
-      <p>Canvases</p>
-    </div>
-  </article>
-  <article class="tool collapse searchCanvases">
-    <div>
-      <h2>Lava Lamp</h2>
-      <p>A satisfying animation using svg filters to make a gooey effect.</p>
-      <p><a href="/tools/lavalamp">Lava Lamp</a></p>
-    </div>
-    <div>
-      <p>Canvases</p>
-    </div>
-  </article>
-  <article class="tool collapse searchCanvases">
-    <div>
-      <h2>JavaScript Alpaca</h2>
-      <p>An old assignment.</p>
-      <p><a href="/tools/alpaca">JavaScript Alpaca</a></p>
-    </div>
-    <div>
-      <p>Canvases</p>
-    </div>
-  </article>
-  <article class="tool collapse searchCanvases">
-    <div>
-      <h2>JavaScript Cells</h2>
-      <p>An experiment in mathematical representation of cell shapes. Work in progress.</p>
-      <p><a href="/tools/cells">JavaScript Cells (WIP)</a></p>
-    </div>
-    <div>
-      <p>Canvases</p>
-    </div>
-  </article>
-  <article class="tool collapse searchCanvases">
-    <div>
-      <h2>Space Engineers Circle Generator</h2>
-      <p>A pixel circle generator that can use the suite of shapes from the game Space Engineers</p>
-      <p><a href="/tools/SEcircle">Space Engineers Circle Generator</a></p>
-    </div>
-    <div>
-      <p>Canvases</p>
-    </div>
-  </article>
-  <article class="tool collapse searchUniques">
-    <div>
-      <h2>Phylogenetic Tree Editor</h2>
-      <p>Create and modify custom phylogenetic trees</p>
-      <p><a href="/tools/phylogenetic_tree_editor">Phylogenetic Tree Editor</a></p>
-    </div>
-    <div>
-      <p>Unique</p>
-    </div>
-  </article>
-  <article class="tool collapse searchUniques">
-    <div>
-      <h2>Commodore Vic-20 Character Generator</h2>
-      <p>Allows you to convert 8*8 pixel art into a BASIC command for use in creating custom character graphics.</p>
-      <p><a href="/tools/vic">Vic-20 character generator</a></p>
-    </div>
-    <div>
-      <p>Unique</p>
-    </div>
-  </article>
-  <article class="tool collapse searchUniques">
-    <div>
-      <h2>Optical Jellybean Recogniser</h2>
-      <p>Who says you need machine learning to recognise jelly beans?</p>
-      <p><a href="/tools/bean">Optical Jellybean Recogniser</a></p>
-    </div>
-    <div>
-      <p>Unique</p>
-    </div>
-  </article>
-</div>
+<article class="grid" style="grid-template-columns: auto min-content">
+  <div style="position: relative">
+    <h2>Space Engineers Circle Generator</h2>
+    <p>A pixel circle generator that can use the suite of shapes from the game Space Engineers.</p>
+    <br/>
+    <p>This tool is for planning out builds that need round shapes (hulls, nacelles, rings). Circles are notoriously hard to create free-hand, especially when you have a number of different slopes to use. This tool takes the pain out of that process and hands you the mathematically accurate circle or ellipse you need.</p>
+    <br/>
+    <br/>
+    <br/>
+    <a class="btn-1 btn-call-to-action" href="/tools/SECircle">Space Engineers Circle Generator →</a>
+  </div>
+  <img src="/images/SpaceEngineersCircleGeneratorLogo.png">
+</article>
+<article class="grid" style="grid-template-columns: auto min-content">
+  <div style="position: relative">
+    <h2>Matrix Multiplication Visualisation</h2>
+    <p>This is my mental method of multiplying matrices (:p) in 3d. A written explanation of how this works and how this can help you visualise matrix multiplication can be found <a href="/blog/6">here</a>.</p>
+    <br/>
+    <br/>
+    <br/>
+    <a class="btn-1 btn-call-to-action" href="/tools/Matrix">Matrix Multiplication Visualisation →</a>
+  </div>
+  <img src="/images/MatrixMultiplicationLogo.png">
+</article>
+<article class="grid" style="grid-template-columns: auto min-content">
+  <div style="position: relative">
+    <h2>Commodore Vic-20 Character Art Generator</h2>
+    <p>Allows you to convert 8*8 pixel art into a BASIC command for use in creating custom character graphics.</p>
+    <br/>
+    <p>The Commodore Vic-20 can display custom graphics by modifying the 8*8 images that make up its character set. By overriding those memory positions with numbers held in a DATA command, fun new graphics can be added to a game when it loads.</p>
+    <br/>
+    <br/>
+    <br/>
+    <a class="btn-1 btn-call-to-action" href="/tools/Vic20ArtEditor">Vic-20 Character Art Generator →</a>
+  </div>
+  <img src="/images/Vic20Logo.png">
+</article>
+<article class="grid" style="grid-template-columns: auto min-content">
+  <div style="position: relative">
+    <h2>Dithering Demonstration</h2>
+    <p>Dithering is an effect that exploits the fact that eyes and cameras collect light over a 2d area in order to determine colour. By having two or more different colours very close together, they are interpreted as a single combined light source. This leads to interesting phenomena, such as how a grid of small but distinct blue and red squares appears purple. This tool is an interactive demonstration of this effect.</p>
+    <br/>
+    <br/>
+    <br/>
+    <a class="btn-1 btn-call-to-action" href="/tools/Dithering">Dithering Demonstration →</a>
+  </div>
+  <img src="/images/DitheringDemonstrationLogo.png">
+</article>
+

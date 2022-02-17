@@ -1,0 +1,35 @@
+<% page_title = "Jelly Bean Identifier | Mxmbrook.co.uk"%>
+<% breadcrumb = "Jelly Bean Identifier"%>
+<% layout('layout/shenanigans') %>
+<style>
+  #JSBeanContainer{
+    position: relative;
+    text-align: center;
+    color: white;
+    font-family:"Trebuchet MS";
+    text-shadow: 0 0 3px #000000
+  }
+  #JSBeanGuess{
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  #JSBeanCanvas{
+    border-radius:24px;
+    width:80vw;
+    max-width:400px;
+  }
+  #JSBeanPlayer{
+    display: none;
+  }
+</style>
+<article id="JSBean">
+  <h1>Optical Jelly Bean Identifier</h1>
+  <div id="JSBeanContainer">
+    <canvas id="JSBeanCanvas" width="400" height="400"></canvas>
+    <p id="JSBeanGuess">Loading</p>
+  </div>
+  <video id="JSBeanPlayer" autoplay></video>
+  <script src="/javascripts/JSBean.js"></script>
+</article>

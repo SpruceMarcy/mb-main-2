@@ -1,0 +1,5 @@
+<% layout('layout/application') %>
+<breadcrumb-trail>
+    <p>You are here: <a href="/">Home</a> → <a href="/tools/">Tools</a><%if(breadcrumb){%> → <%=breadcrumb%><%}%> ↴</p>
+</breadcrumb-trail>
+<%- body -%>

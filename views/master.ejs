@@ -1,0 +1,160 @@
+<% page_title = "Home | Mxmbrook.co.uk"%>
+<% layout('layout/application') %>
+<div class="grid" style="grid-template-columns:25% 25% 25% 25%">
+  <article>
+    <h1>This is a title 1</h1>
+    <p>This is a paragraph</p>
+    <h2>This is a title 2</h2>
+    <p>This is a paragraph</p>
+    <h3>This is a title 3</h3>
+    <p>This is a paragraph</p>
+    <h4>This is a title 4</h4>
+    <p>This is a paragraph</p>
+    <h5>This is a title 5</h5>
+    <p>This is a paragraph</p>
+    <h6>This is a title 6</h6>
+    <p>This is a paragraph</p>
+  </article>
+  <article>
+    <h1>This is a title 1</h1>
+    <h1>This is a title 1</h1>
+    <h2>This is a title 2</h2>
+    <h2>This is a title 2</h2>
+    <h3>This is a title 3</h3>
+    <h3>This is a title 3</h3>
+    <h4>This is a title 4</h4>
+    <h4>This is a title 4</h4>
+    <h5>This is a title 5</h5>
+    <h5>This is a title 5</h5>
+    <h6>This is a title 6</h6>
+    <h6>This is a title 6</h6>
+  </article>
+  <article>
+    <p>This is a paragraph</p>
+    <p>This is another paragraph</p>
+    <p>This is a very long paragraph that may go onto the next line if the article is not wide enough to contain it</p>
+    <p>This is another paragraph</p>
+
+    <p>This is a paragraph after a html line</p>
+    <br/>
+    <p>This is a paragraph after a br</p>
+    <br/>
+    <br/>
+    <p>This is a paragraph after two brs</p>
+    <span><p>This is </p><p>two paragraphs in a span</p></span>
+  </article>
+  <article>
+    <p>This is a paragraph</p>
+    <p>This is a paragraph <a href="#">with a link</a> in it</p>
+    <a href="#">out <p>This is a paragraph in a link</p> out</a>
+    <a href="#">This is a link</a>
+    <a href="#">This is another link</a>
+  </article>
+  <article>
+    <button>button1</button>
+    <button>button2</button>
+    <button>button3</button>
+    <button href="#">button#</button>
+    <button>button5</button>
+    <button>button6</button>
+    <button>button7</button>
+    <button>button8</button>
+    <button>This is a button with a really long amount of text in it, so much so that it should probably wrap</button>
+    <span>
+      <button>Three</button>
+      <button>buttons</button>
+      <button>in a span</button>
+    </span>
+    <span>
+      <button>Button in a span</button>
+    </span>
+
+    <button>Link <a href="#">in a button</a>!</button>
+    <a href="#"><button>button</button> in a link</a>
+    <a href="#"><button>button in a link</button></a>
+  </article>
+  <article>
+    <input type="button" value="button">
+    <input type="reset">
+    <input type="submit">
+    <input type="checkbox">
+    <input type="radio">
+    <input type="color">
+    <input type="range">
+    <br/>
+    <input type="date">
+    <input type="datetime-local">
+    <input type="month">
+    <input type="time">
+    <input type="week">
+    <br/>
+    <input type="email" placeholder="email">
+    <input type="number" placeholder="number">
+    <input type="password" placeholder="password">
+    <input type="search" placeholder="search">
+    <input type="tel" placeholder="telephone">
+    <input type="text" placeholder="text">
+    <input type="url" placeholder="url">
+    <br/>
+    <input type="file">
+    <input type="image">
+    <textarea placeholder="textarea"></textarea>
+  </article>
+  <article>
+    <code>print(hello world)
+wait no;
+print("hello world")
+//that's better</code>
+  </article>
+</div>
+<article>
+  <h1>IDs</h1>
+  <ol id="MasterContents">
+  </ol>
+</article>
+<article>
+  <h1>Classes</h1>
+  <ol id="PageClassList">
+  </ol>
+</article>
+<article>
+  <h1>Styles</h1>
+  <ol id="PageStyleList">
+  </ol>
+</article>
+<%- include index.ejs %>
+<%- include about.ejs %>
+<%for(let toolFile of tools){%>
+  <%- include("tools/"+toolFile); %>
+<%}%>
+<script>
+  function elementDepth(el){
+    let depth = 0
+    while(null!==el.parentElement){
+      el = el.parentElement
+      depth++
+    }
+    return depth
+  }
+  let ids = []
+  let duplicateIds = []
+  for(let e of document.querySelectorAll('*[id]')){
+    if(ids.includes(e.id)){
+      duplicateIds.push(e.id)
+    }
+    ids.push(e.id)
+  }
+  for(let e of document.querySelectorAll('*[id]')){
+    if(duplicateIds.includes(e.id)){
+      $("MasterContents").innerHTML+="<li style='color:red'>"+("[O]".repeat(elementDepth(e)))+" <a href=\"#"+e.id+"\">"+e.id+"</a></li>"
+    }else{
+      $("MasterContents").innerHTML+="<li>"+("[O]".repeat(elementDepth(e)))+" <a href=\"#"+e.id+"\">"+e.id+"</a></li>"
+    }
+  }
+  for(let e of document.querySelectorAll('*[class]')){
+      $("PageClassList").innerHTML+="<li>"+e.className+"</li>"
+  }
+  for(let e of document.querySelectorAll('*[style]')){
+    $("PageStyleList").innerHTML+="<li>"+e.style.cssText+"</li>"
+  }
+</script>
