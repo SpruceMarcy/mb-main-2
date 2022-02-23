@@ -22,7 +22,7 @@ router.post('/contact', function(req, res, next) {
   let opts = getOpts();
   let ipV6Stripped = req.socket.remoteAddress
   if (ipV6Stripped.startsWith("::ffff:")){
-    ipV6Stripped = ipV6Stripped.substring(6,ipV6Stripped.length+1)
+    ipV6Stripped = ipV6Stripped.substring(7,ipV6Stripped.length+1)
   }
   request("https://www.google.com/recaptcha/api/siteverify?secret=" + process.env.reCAPTCHA_secret
       + "&response=" + req.body['g-recaptcha-response']
