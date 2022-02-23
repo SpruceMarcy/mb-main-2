@@ -14,13 +14,13 @@
     //Uwu what's this? Just gotta get a bit of info from ya.
     //People are terrible at actually including context in their
     //messages so I gotta do it myself :)
-    document.getElementById("contactForm").onsubmit=function(){
+    document.getElementById("contactForm").addEventListener("submit",function(){
       let data=document.createElement("input")
       data.setAttribute("type","hidden")
       data.setAttribute("name","browser")
       let serialData="AppCodeName: "+navigator.appCodeName+" | AppName: "+navigator.appName+" | AppVersion: "+ navigator.appVersion+" | Lang: "+navigator.language+" | Platform: "+navigator.platform+" | UserAgent: "+navigator.userAgent+" | Product: "+navigator.product+" | Referrer: "+document.referrer
       data.setAttribute("value",serialData)
       document.getElementById("contactForm").appendChild(data)
-    }
+    })
   </script>
 </article>

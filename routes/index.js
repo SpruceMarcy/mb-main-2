@@ -20,16 +20,28 @@ router.get('/contact', function(req, res, next) {
 /* POST contact page. */
 router.post('/contact', function(req, res, next) {
   let opts = getOpts();
+  let ipV6Stripped = req.socket.remoteAddress
+  if (ipV6Stripped.startsWith("::ffff:")){
+    ipV6Stripped = ipV6Stripped.substring(6,ipV6Stripped.length+1)
+  }
   request("https://www.google.com/recaptcha/api/siteverify?secret=" + process.env.reCAPTCHA_secret
       + "&response=" + req.body['g-recaptcha-response']
-      + "&remoteip=" + req.socket.remoteAddress,function(error,response,body) {
+      + "&remoteip=" + ipV6Stripped,function(error,response,body) {
     let parsedBody = JSON.parse(body);
-    if(parsedBody.success !== undefined && !parsedBody.success) {
+    let returned = false;
+    if(process.env.ENVIRONMENT_SPEC !== "dev" && parsedBody.success !== undefined && !parsedBody.success) {
       res.status(401);
       res.locals.error = { "status" : 401}
-      res.locals.ip = req.socket.remoteAddress
+      res.locals.ip = ipV6Stripped
       res.render('error',getOpts())
-      return;
+      returned = true
+    }
+    if(req.body.browser === undefined){
+      res.status(401);
+      res.locals.error = { "status" : 401}
+      res.locals.ip = ipV6Stripped
+      res.render('contactBotFail',getOpts())
+      returned = true;
     }
     let transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
@@ -45,14 +57,18 @@ router.post('/contact', function(req, res, next) {
       from: 'contact.form@mxmbrook.co.uk',
       to: 'mdr.brook@gmail.com',
       subject: "Mxmbrook.co.uk Contact Form Response",
-      text: "IP Address: " + req.socket.remoteAddress + " | " + req.body.browser+"\n\n"+req.body.message
+      text: "IP Address: " + ipV6Stripped + " | " + req.body.browser+"\n\n"+req.body.message
     };
+    if(returned){
+      mailOptions.to = "mdr.brook+failedmessage@gmail.com"
+      mailOptions.subject = "Mxmbrook.co.uk Contact Form Failed Response"
+    }
 
     transporter.sendMail(mailOptions, function(error, info){
       if (error) {
         console.log(error);
-        res.render('contactSent', opts);
-      } else {
+      }
+      if(!returned) {
         res.render('contactSent', opts);
       }
     });
