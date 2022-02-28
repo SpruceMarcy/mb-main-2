@@ -178,11 +178,12 @@ class PhylogenyInterface{
 	handleScroll(event){
 		if(event.deltaY!==0){
 			let oldScale   = this.scale
-			this.scale     -= (event.deltaY / Math.abs(event.deltaY)) * 0.06 * this.scale;
+			this.scale     -= (event.deltaY ) * 0.06 * this.scale;
 			this.scale      = this.scale > 0.5 ? this.scale : 0.5;
 			this.scale      = this.scale < 20 ? this.scale : 20;
-			let centerX    = this.canvasWidth/2
-			let centerY    = this.canvasHeight/2
+			let mousePos    = getMousePos(event,this.canvas);
+			let centerX     = mousePos.x//this.canvasWidth/2
+			let centerY     = mousePos.y//this.canvasHeight/2
 			this.offset[0]  = (this.offset[0]-(centerX))*(this.scale/oldScale)+centerX;
 			this.offset[1]  = (this.offset[1]-(centerY))*(this.scale/oldScale)+centerY;
 			$("PhylogenyCanvasOverlay").style.fontSize = Math.floor(15*this.scale)+"px"
@@ -288,14 +289,20 @@ function deleteBranch(tree,path){
 
 //======INTERFACE FUNCTIONS======
 function toggleTextArea(){
+	let pane = $("PhylogenyRawTreePane")
+	let togglePaneButton = $("PhylogenyToggleRawTreePane")
+	pane.hidden = !pane.hidden
+	togglePaneButton.innerText = "< Source"
+	if(pane.hidden){
+		togglePaneButton.innerText = "> Source"
+	}
+	updatePaneWidths()
+}
+function updatePaneWidths(){
 	let phylogenyRawTreePane = $("PhylogenyRawTreePane")
 	if( phylogenyRawTreePane.hidden){
-		phylogenyRawTreePane.hidden = false
-		$("PhylogenyToggleRawTreePane").innerText = "< Source"
-		$("editorContainer").style.gridTemplateColumns = "30% 70%"
+		$("editorContainer").style.gridTemplateColumns = "25% 75%"
 	}else{
-		phylogenyRawTreePane.hidden = true
-		$("PhylogenyToggleRawTreePane").innerText = "> Source"
 		$("editorContainer").style.gridTemplateColumns = "0% 100%"
 	}
 	window.dispatchEvent(new Event("resize"))
