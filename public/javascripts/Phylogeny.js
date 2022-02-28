@@ -13,9 +13,11 @@ class PhylogenyInterface{
 		this.canvas = canvas
 		this.context = canvas.getContext("2d");
 		this.canvasParent = canvasParent
+		this.dpr = window.devicePixelRatio || 1
+		this.dpr *= 2
 		this.resizeCanvas()
-		this.scale         = 1.0;
-		this.offset        = [0,0]
+		this.scale         = 2*this.dpr;
+		this.offset        = [this.scale*10,this.canvasHeight/2]
 		this.generatedGrid = 0;
 		this.isDragging    = false;
 		this.showGrid 	   = true;
@@ -23,19 +25,19 @@ class PhylogenyInterface{
 		this.currentCollisionBox = null
 		this.lastKnownMousePos = {x:0,y:0}
 		this.canvas.addEventListener("wheel",this.handleScroll.bind(this),false);
-		$("PhylogenyCanvasOverlay").style.fontSize = Math.floor(15*this.scale)+"px"
+		$("PhylogenyCanvasOverlay").style.fontSize = Math.floor(15*this.scale/this.dpr)+"px"
 		this.canvas.addEventListener("mousedown",this.handleMouseDown.bind(this));
 		this.canvas.addEventListener("mousemove",this.handleMouseMove.bind(this));
 	}
 	resizeCanvas(){
-		this.canvas.height= this.canvasParent.offsetHeight;
-		this.canvas.width = this.canvasParent.offsetWidth;
+		this.canvas.height= this.canvasParent.offsetHeight*this.dpr;
+		this.canvas.width = this.canvasParent.offsetWidth*this.dpr;
 		this.canvasHeight = this.canvas.height;
 		this.canvasWidth  = this.canvas.width;
 	}
 	resetView(){
-		this.scale = 1.0;
-		this.offset = [0,0]
+		this.scale = 2*this.dpr;
+		this.offset = [this.scale*10,this.canvasHeight/2]
 		this.drawAll();
 	}
 	drawLine(x1,y1,x2,y2,width,colour){
@@ -130,7 +132,7 @@ class PhylogenyInterface{
 		this.drawLocalLine(x,y,x+lineLength,y,1,"#ffffff")
 		this.collisionBoxes.push({
 			x:x,
-			y:y - width/2,
+			y:(y - width/2),
 			width:lineLength,
 			height:width,
 			path:tree["path"]
@@ -139,15 +141,15 @@ class PhylogenyInterface{
 	//Window -> interface
 	convertToLocal(x,y){
 		return {
-			x: (x-this.offset[0])/this.scale,
-			y: (y-this.offset[1])/this.scale
+			x: (x*this.dpr-this.offset[0])/this.scale,
+			y: (y*this.dpr-this.offset[1])/this.scale
 		}
 	}
 	//Interface -> window
 	convertToGlobal(x,y){
 		return {
-			x: (x*this.scale)+this.offset[0],
-			y: (y*this.scale)+this.offset[1]
+			x: ((x*this.scale)+this.offset[0])/this.dpr,
+			y: ((y*this.scale)+this.offset[1])/this.dpr
 		}
 	}
 	editNode(event){
@@ -178,15 +180,15 @@ class PhylogenyInterface{
 	handleScroll(event){
 		if(event.deltaY!==0){
 			let oldScale   = this.scale
-			this.scale     -= (event.deltaY ) * 0.06 * this.scale;
+			this.scale     -= (event.deltaY ) * 0.02 * this.scale;
 			this.scale      = this.scale > 0.5 ? this.scale : 0.5;
 			this.scale      = this.scale < 20 ? this.scale : 20;
 			let mousePos    = getMousePos(event,this.canvas);
-			let centerX     = mousePos.x//this.canvasWidth/2
-			let centerY     = mousePos.y//this.canvasHeight/2
+			let centerX     = mousePos.x*this.dpr//this.canvasWidth/2
+			let centerY     = mousePos.y*this.dpr//this.canvasHeight/2
 			this.offset[0]  = (this.offset[0]-(centerX))*(this.scale/oldScale)+centerX;
 			this.offset[1]  = (this.offset[1]-(centerY))*(this.scale/oldScale)+centerY;
-			$("PhylogenyCanvasOverlay").style.fontSize = Math.floor(15*this.scale)+"px"
+			$("PhylogenyCanvasOverlay").style.fontSize = Math.floor(15*this.scale/this.dpr)+"px"
 			this.canvas.dispatchEvent(new Event("mousemove"))
 			this.drawAll()
 			event.preventDefault();
@@ -199,8 +201,8 @@ class PhylogenyInterface{
 	handleMouseMove(event){
 		this.lastKnownMousePos = {x:event.clientX,y:event.clientY}
 		if(this.isDragging){
-			this.offset[0]+=(event.clientX-this.dragOrigin[0])
-			this.offset[1]+=(event.clientY-this.dragOrigin[1])
+			this.offset[0]+=(event.clientX-this.dragOrigin[0])*this.dpr
+			this.offset[1]+=(event.clientY-this.dragOrigin[1])*this.dpr
 			this.dragOrigin=[event.clientX,event.clientY];
 			this.drawAll()
 		}
@@ -246,7 +248,7 @@ function loadJSON(){
 		phylogenyInterface.collisionBoxes = []
 		phylogenyInterface.renderTree = tree2
 		phylogenyInterface.buildTree(phylogenyInterface.renderTree)
-		phylogenyInterface.recursiveDraw(phylogenyInterface.renderTree,75,phylogenyInterface.canvasHeight/2)
+		phylogenyInterface.recursiveDraw(phylogenyInterface.renderTree,0,0)
 	}catch (e) {
 
 	}
@@ -300,7 +302,7 @@ function toggleTextArea(){
 }
 function updatePaneWidths(){
 	let phylogenyRawTreePane = $("PhylogenyRawTreePane")
-	if( phylogenyRawTreePane.hidden){
+	if(!phylogenyRawTreePane.hidden){
 		$("editorContainer").style.gridTemplateColumns = "25% 75%"
 	}else{
 		$("editorContainer").style.gridTemplateColumns = "0% 100%"
