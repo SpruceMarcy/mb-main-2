@@ -3,7 +3,6 @@
 
 //======HELPER FUNCTIONS======
 function $(e){return document.getElementById(e);}
-//Window -> interface
 
 function mod(x,n){
 	return ((x%n) + n) %n
@@ -19,6 +18,7 @@ class PhylogenyInterface{
 		this.offset        = [0,0]
 		this.generatedGrid = 0;
 		this.isDragging    = false;
+		this.showGrid 	   = true;
 		this.collisionBoxes = []
 		this.currentCollisionBox = null
 		this.lastKnownMousePos = {x:0,y:0}
@@ -65,7 +65,9 @@ class PhylogenyInterface{
 	}
 	drawAll(){
 		this.context.clearRect(0,0,this.canvasWidth,this.canvasHeight);
-		this.drawGrid();
+		if(this.showGrid){
+			this.drawGrid();
+		}
 		loadJSON();
 	}
 	drawGrid(){
@@ -163,6 +165,16 @@ class PhylogenyInterface{
 		deleteBranch(JSONTree,this.currentCollisionBox.path)
 		updateRawTree(JSONTree)
 	}
+	toggleGrid(event){
+		this.showGrid = !this.showGrid
+		if(this.showGrid) {
+			$("PhylogenyToggleGrid").innerText = "# Hide Grid"
+		}else{
+			$("PhylogenyToggleGrid").innerText = "# Show Grid"
+		}
+		this.drawAll()
+	}
+
 	handleScroll(event){
 		if(event.deltaY!==0){
 			let oldScale   = this.scale
@@ -288,7 +300,33 @@ function toggleTextArea(){
 	}
 	window.dispatchEvent(new Event("resize"))
 }
+function toggleFullScreen(){
+	let elementsToBeHidden = Array.from(document.getElementsByTagName("header")).concat(Array.from(document.getElementsByTagName("breadcrumb-trail"))).concat(Array.from(document.getElementsByTagName("footer")))
+	let pageTitle = $("PageTitle")
+	elementsToBeHidden.push(pageTitle)
+	let toHide = !pageTitle.hidden
 
+	for(let e of elementsToBeHidden){
+		e.hidden = toHide
+	}
+	if(toHide){
+		$("content").style.maxWidth="100%";
+		$("Phylogeny").style.marginTop="0";
+		$("Phylogeny").style.marginBottom="0";
+		$("Phylogeny").style.padding="0";
+		$("editorContainer").style.margin="0"
+		$("editorContainer").style.minHeight="99.9vh";
+		window.scrollTo(0,0);
+	}else{
+		$("content").style=null;
+		$("Phylogeny").style.marginTop=null;
+		$("Phylogeny").style.marginBottom=null;
+		$("Phylogeny").style.padding=null;
+		$("editorContainer").style.margin="1em";
+		$("editorContainer").style.minHeight=null;
+	}
+	window.dispatchEvent(new Event("resize"))
+}
 function resetTree(){
 	if(confirm("Are you sure you want to reset the tree? This will delete all current work.")) {
 		updateRawTree({name: ""})
@@ -332,6 +370,8 @@ let JSONTree = {}
 loadJSON();
 
 $("PhylogenyToggleRawTreePane").addEventListener("click",toggleTextArea)
+$("PhylogenyToggleFullScreen").addEventListener("click",toggleFullScreen)
+$("PhylogenyToggleGrid").addEventListener("click",phylogenyInterface.toggleGrid.bind(phylogenyInterface))
 $("PhylogenyResetView").addEventListener("click",phylogenyInterface.resetView.bind(phylogenyInterface));
 $("PhylogenyResetTree").addEventListener("click",resetTree);
 $("PhylogenyRawTreePane").addEventListener("input",phylogenyInterface.drawAll.bind(phylogenyInterface),false);

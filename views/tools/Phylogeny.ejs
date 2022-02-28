@@ -2,10 +2,10 @@
 <% breadcrumb = "Phylogenetic Tree Editor"%>
 <% layout('layout/tools') %>
 <article id="Phylogeny" class="fillWidth" style="display:table;vertical-align:middle;">
-  <h1>Phylogenetic Tree Editor</h1>
-  <div id="editorContainer" class="grid" style="margin:1em;grid-template-columns:30% 70%;height:525px">
+  <h1 id="PageTitle">Phylogenetic Tree Editor</h1>
+  <div id="editorContainer" class="grid" style="margin:1em;grid-template-columns:0% 100%;height:525px">
     <div>
-      <textarea class="noResize fillWidth" spellcheck="false" id="PhylogenyRawTreePane" style="height:100%;padding:0;border:0;white-space: nowrap">
+      <textarea class="noResize fillWidth" spellcheck="false" id="PhylogenyRawTreePane" hidden style="height:100%;padding:0;border:0;white-space: nowrap">
 {
   "name":"Family",
   "taxa":
@@ -40,13 +40,21 @@
     </div>
     <div style="display: flex;flex-direction: column">
       <btn-group class="btn-group-square">
-        <button id="PhylogenyToggleRawTreePane">< Source</button><button id="PhylogenyResetView">Reset View</button><button id="PhylogenyResetTree">Reset Tree</button>
+        <button id="PhylogenyToggleRawTreePane">> Source</button>
+        <label> View: </label>
+        <button id="PhylogenyResetView">🔍&#xFE0E; Reset View</button>
+        <button id="PhylogenyToggleGrid"># Hide Grid</button>
+        <button id="PhylogenyToggleFullScreen">🗖&#xFE0E; Full Screen</button>
+        <label> Tree: </label>
+        <button id="PhylogenyResetTree">🗑&#xFE0E; Reset Tree</button>
       </btn-group>
-      <div id="PhylogenyCanvasParent" style="flex: 1;position: relative;overflow: hidden;">
+      <div id="PhylogenyCanvasParent" style="flex: 1;position: relative;overflow: hidden;height: 100%">
         <btn-group id="PhylogenyCanvasOverlay" style="position: absolute;top:0px;left:0px;" hidden>
-          <button id="PhylogenyEditNode">Edit</button><button id="PhylogenyAddNode">+</button><button id="PhylogenyDeleteNode" class="btn-warning">⨯</button>
+          <button id="PhylogenyEditNode">Edit</button>
+          <button id="PhylogenyAddNode">+</button>
+          <button id="PhylogenyDeleteNode" class="btn-warning">🗑&#xFE0E;</button>
         </btn-group>
-        <canvas id="PhylogenyCanvas" style="cursor:move;display: block;"></canvas>
+        <canvas id="PhylogenyCanvas" style="cursor:move;display: block;max-width: 100%"></canvas>
       </div>
       <p>&nbsp;&#x1f6c8; Click and drag to pan. Scroll to zoom</p>
     </div>
