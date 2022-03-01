@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://mxmbrook.co.uk/sitemap.xml
