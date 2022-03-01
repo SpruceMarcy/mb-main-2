@@ -18,6 +18,7 @@ class PhylogenyInterface{
 		this.resizeCanvas()
 		this.scale         = 2*this.dpr;
 		this.offset        = [this.scale*10,this.canvasHeight/2]
+		this.resizeOverlay()
 		this.generatedGrid = 0;
 		this.isDragging    = false;
 		this.showGrid 	   = true;
@@ -38,6 +39,7 @@ class PhylogenyInterface{
 	resetView(){
 		this.scale = 2*this.dpr;
 		this.offset = [this.scale*10,this.canvasHeight/2]
+		this.resizeOverlay()
 		this.drawAll();
 	}
 	drawLine(x1,y1,x2,y2,width,colour){
@@ -58,11 +60,11 @@ class PhylogenyInterface{
 		this.context.closePath();
 		this.context.stroke();
 	}
-	drawLocalText(text,x,y){
+	drawLocalText(text,x,y,color){
 		this.context.beginPath()
 		//context.font = "30px Impact";
 		this.context.font = Math.floor(15*this.scale).toString()+"px sanserif"
-		this.context.fillStyle = "#FFFFFF"
+		this.context.fillStyle = color
 		this.context.fillText( text, x*this.scale+this.offset[0], y*this.scale+this.offset[1] );
 	}
 	drawAll(){
@@ -73,17 +75,21 @@ class PhylogenyInterface{
 		loadJSON();
 	}
 	drawGrid(){
+		let color = "#bcbcbc"
+		if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+			color = "#434343"
+		}
 		for(let x=0;x<=this.canvasWidth/this.scale;x+=50){
 			this.drawLine(
 				x+(mod(this.offset[0]/this.scale,50)),0,
 				x+(mod(this.offset[0]/this.scale,50)),this.canvasHeight/this.scale,
-				1,"#434343");
+				1,color);
 		}
 		for(let y=0;y<=this.canvasHeight/this.scale;y+=50){
 			this.drawLine(
 				0,y+(mod(this.offset[1]/this.scale,50)),
 				this.canvasWidth/this.scale,y+(mod(this.offset[1]/this.scale,50)),
-				1,"#434343");
+				1,color);
 		}
 	}
 	buildTree(tree,path=[]){
@@ -114,6 +120,7 @@ class PhylogenyInterface{
 	recursiveDraw(tree,x,y){
 		let lineLength = 75
 		let width = tree["width"]
+		let color = window.getComputedStyle(this.canvas).getPropertyValue("color")
 		if(tree.hasOwnProperty("taxa")) {
 			lineLength = 100
 			if(tree["taxa"].length>1){
@@ -122,14 +129,18 @@ class PhylogenyInterface{
 					y + tree["verticalLineTop"],
 					x + lineLength,
 					y + tree["verticalLineBottom"],
-					1, "#ffffff")
+					1, color)
 			}
 			for(let taxon of tree["taxa"]){
 				this.recursiveDraw(taxon,x+lineLength,y+taxon["yOffsetFromParent"])
 			}
 		}
-		this.drawLocalText(tree["name"],x+tree["nameXOffset"],y+tree["nameYOffset"])
-		this.drawLocalLine(x,y,x+lineLength,y,1,"#ffffff")
+		this.drawLocalText(tree["name"],
+			x+tree["nameXOffset"],
+			y+tree["nameYOffset"],
+			color
+		)
+		this.drawLocalLine(x,y,x+lineLength,y,1,color)
 		this.collisionBoxes.push({
 			x:x,
 			y:(y - width/2),
@@ -176,7 +187,9 @@ class PhylogenyInterface{
 		}
 		this.drawAll()
 	}
-
+	resizeOverlay(){
+		$("PhylogenyCanvasOverlay").style.fontSize = Math.floor(15*this.scale/this.dpr)+"px"
+	}
 	handleScroll(event){
 		if(event.deltaY!==0){
 			let deltaY      = Math.min(Math.max(event.deltaY,-2),2)
@@ -189,7 +202,7 @@ class PhylogenyInterface{
 			let centerY     = mousePos.y*this.dpr//this.canvasHeight/2
 			this.offset[0]  = (this.offset[0]-(centerX))*(this.scale/oldScale)+centerX;
 			this.offset[1]  = (this.offset[1]-(centerY))*(this.scale/oldScale)+centerY;
-			$("PhylogenyCanvasOverlay").style.fontSize = Math.floor(15*this.scale/this.dpr)+"px"
+			this.resizeOverlay()
 			this.canvas.dispatchEvent(new Event("mousemove"))
 			this.drawAll()
 			event.preventDefault();
