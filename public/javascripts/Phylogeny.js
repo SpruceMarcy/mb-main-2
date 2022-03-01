@@ -179,8 +179,9 @@ class PhylogenyInterface{
 
 	handleScroll(event){
 		if(event.deltaY!==0){
-			let oldScale   = this.scale
-			this.scale     -= (event.deltaY ) * 0.02 * this.scale;
+			let deltaY      = Math.min(Math.max(event.deltaY,-2),2)
+			let oldScale    = this.scale
+			this.scale     -= deltaY * 0.02 * this.scale;
 			this.scale      = this.scale > 0.5 ? this.scale : 0.5;
 			this.scale      = this.scale < 20 ? this.scale : 20;
 			let mousePos    = getMousePos(event,this.canvas);
