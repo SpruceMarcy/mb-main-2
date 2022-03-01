@@ -122,15 +122,19 @@ router.get('/master', function(req, res, next) {
 
 router.get('/twitter', function(req, res, next) {
   let opts = getOpts();
-  res.redirect('https://twitter.com/mxmbrook');
+  res.redirect(303, 'https://twitter.com/mxmbrook');
 });
 router.get('/linkedin', function(req, res, next) {
   let opts = getOpts();
-  res.redirect('https://www.linkedin.com/in/marcy-brook-9a410017a/',);
+  res.redirect(303,'https://www.linkedin.com/in/marcy-brook-9a410017a/',);
 });
 router.get('/github', function(req, res, next) {
   let opts = getOpts();
-  res.redirect('https://github.com/SpruceMarcy');
+  res.redirect(303,'https://github.com/SpruceMarcy');
 });
+router.get('/tools/uwu', function(req, res) {
+  res.redirect(301, '/shenanigans/uwu');
+});
+
 
 module.exports = router;
