@@ -20,7 +20,7 @@ router.get('/contact', function(req, res, next) {
 /* POST contact page. */
 router.post('/contact', function(req, res, next) {
   let opts = getOpts();
-  let ipV6Stripped = req.socket.remoteAddress
+  let ipV6Stripped = req.socket.localAddress
   if (ipV6Stripped.startsWith("::ffff:")){
     ipV6Stripped = ipV6Stripped.substring(7,ipV6Stripped.length+1)
   }
@@ -113,7 +113,7 @@ router.get('/master', function(req, res, next) {
   }else{
     res.status(403);
     res.locals.error = { "status" : 403}
-    res.locals.ip = req.socket.remoteAddress
+    res.locals.ip = req.socket.localAddress
     res.render('error',getOpts())
   }
 });
