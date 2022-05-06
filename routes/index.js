@@ -20,7 +20,7 @@ router.get('/contact', function(req, res, next) {
 /* POST contact page. */
 router.post('/contact', function(req, res, next) {
   let opts = getOpts();
-  let ipV6Stripped = req.socket.localAddress
+  let ipV6Stripped = req.header('x-forwarded-for') || req.socket.localAddress;
   if (ipV6Stripped.startsWith("::ffff:")){
     ipV6Stripped = ipV6Stripped.substring(7,ipV6Stripped.length+1)
   }
