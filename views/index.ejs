@@ -30,6 +30,7 @@
     <a class="hexSmall" href="/twitter">
       <div>
         <h1><img src="/images/twitter.png" style="width:46%"></h1>
+        <div class="highlightedNotice"><p>Forget&nbsp;twitter,&nbsp;donate to&nbsp;your&nbsp;local&nbsp;wild bird&nbsp;rescue&nbsp;instead!</p></div>
       </div>
     </a>
     <a class="hexSmall" href="/about">
@@ -97,7 +98,6 @@
   .hexGrid>a{
     display: block;
     position: relative;
-    filter: drop-shadow(0px 0px .28vw rgba(0, 0, 0, 0.7));
     width: 10vw;
     height: 8.63vw;
     color: #222;
@@ -129,6 +129,12 @@
   .hexBig:nth-of-type(-2n+7):hover:not(:active) {
     transform: translate(0,calc(50% + 2.5vw)) scale(1.8);
     z-index: 1;
+  }
+  .highlightedNotice{
+    text-shadow: 0 0 0.9em rgb(240,240,240),0 0 0.5em rgb(240,240,240);
+    font-weight: bold;
+    font-size: 0.8em;
+    background-color: rgba(129,135,165, 0.65);
   }
 
 </style>

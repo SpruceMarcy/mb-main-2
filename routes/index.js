@@ -122,7 +122,7 @@ router.get('/master', function(req, res, next) {
 
 router.get('/twitter', function(req, res, next) {
   let opts = getOpts();
-  res.redirect(303, 'https://twitter.com/mxmbrook');
+  res.redirect(303, 'https://www.facebook.com/BirdsBroomhall/');
 });
 router.get('/linkedin', function(req, res, next) {
   let opts = getOpts();

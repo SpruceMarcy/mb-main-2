@@ -34,7 +34,7 @@ body{
     text-align:left;
 }
 *{
-    line-height: 1.15em;
+    line-height: 1.25em;
 }
 section#content{
     max-width:1024px;
@@ -88,6 +88,7 @@ article{
     background-color:var(--top-color);
     margin:8px 0;
     padding:15px;
+    border-radius: 0.5em;
 }
 breadcrumb-trail{
     box-shadow:0 0 3px var(--shadow);
@@ -118,6 +119,18 @@ span{
     white-space: nowrap;
 }
 span>*{
+    display: inline-block;
+}
+p{
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+br{
+    content:" ";
+    display: block;
+    margin-bottom: 1.5em;
+}
+br ~ br{
     display: inline-block;
 }
 a{
