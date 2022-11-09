@@ -121,9 +121,8 @@ span{
 span>*{
     display: inline-block;
 }
-p{
+h1~p, h2~p, h3~p, p ~ p{
     margin-top: 0.5em;
-    margin-bottom: 0.5em;
 }
 br{
     content:" ";
