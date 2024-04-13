@@ -19,7 +19,7 @@ var defaultRouter = express.Router();
 app.engine('ejs', require('ejs-mate'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-if(process.env.ENVIRONMENT_SPEC -= "prod") {
+if(process.env.ENVIRONMENT_SPEC === "prod") {
   app.set('subdomain offset',3)
 } else {
   app.set('subdomain offset',1)
