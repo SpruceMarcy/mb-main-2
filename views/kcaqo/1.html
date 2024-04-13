@@ -1,3 +1,7 @@
+<div id="sticky">
+    <div><a href="https://forms.gle/Rdpxb9BZtuR3D8Az5"><button>Subscribe by email</button></a></div>
+    <div><button onclick=" navigator.clipboard.writeText(window.location.href)">Copy permalink</button></div>
+</div>
 <header>
     <div class="toplayout">
         <p class="topleft">Issue #1</p>
@@ -91,6 +95,8 @@ ON
     <p>All you need is your name, date of birth, and NHS number, and you can take back control of how your data is used by parties with less-than-charitable intentions.</p>
     <img src="../images/trans.png"/>
 </article>
+<div class="mobileOnly"><a href="https://forms.gle/Rdpxb9BZtuR3D8Az5"><button>Click here to subscribe for new editions via email</button></a></div>
+
 <style>
 @font-face {
     font-family: "KeepCalm";
@@ -181,6 +187,7 @@ img{
 }
 body {
   counter-reset: section;
+  width: 100%;
 }
 
 article::after {
@@ -189,5 +196,41 @@ article::after {
   position: absolute;
     bottom: 1em;
     right: 1em;
+}
+@media (max-width: 800px) {
+    #sticky{
+        display: none;
+    }
+}
+#sticky{
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+#sticky div, .mobileOnly{
+    margin-top: 0.4em;
+    display: inline-block;
+    border-radius: 6px;
+    width: min-content;
+    background: linear-gradient(30deg, rgba(27,200,255,1) 20%, rgba(255,120,222,1) 40%, rgba(255,255,255,1) 60%, rgba(255,120,222,1) 80%, rgba(27,200,255,1) 100%); 
+}
+#sticky button, .mobileOnly button {
+    background-color:rgb(240, 247, 245);
+    text-decoration: none;
+    font-weight:800;
+    padding: 0.4em 1.4em;
+    font-size: 1.2em;
+    margin: 1px;
+    cursor: pointer;
+}
+.mobileOnly{
+    display: block;
+    margin: auto;
+    width: max-content;
+}
+@media (min-width: 800px) {
+    .mobileOnly{
+        display: none;
+    }
 }
 </style>
