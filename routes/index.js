@@ -120,7 +120,7 @@ router.get('/master', function(req, res, next) {
 
 //redirects
 
-router.get('/twitter', function(req, res, next) {
+router.get('/birds', function(req, res, next) {
   let opts = getOpts();
   res.redirect(303, 'https://www.facebook.com/WingbeatBirdRescue');
 });
