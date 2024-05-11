@@ -175,11 +175,12 @@ article::after {
 #sticky{
     position: fixed;
     top: 0;
+    z-index: 99999 !important;
     right: 0;
 }
 #sticky div, .mobileOnly{
     margin-top: 0.4em;
-    display: inline-block;
+    display: block;
     border-radius: 6px;
     width: min-content;
     background: linear-gradient(30deg, rgba(27,200,255,1) 20%, rgba(255,120,222,1) 40%, rgba(255,255,255,1) 60%, rgba(255,120,222,1) 80%, rgba(27,200,255,1) 100%); 
@@ -188,6 +189,7 @@ article::after {
     background-color:rgb(240, 247, 245);
     text-decoration: none;
     font-weight:800;
+    z-index: 999999 !important;
     padding: 0.4em 1.4em;
     font-size: 1.2em;
     margin: 1px;
