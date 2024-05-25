@@ -1,7 +1,7 @@
 let express = require('express');
 let router = express.Router();
 
-let latestIssue = '6'
+let latestIssue = '7'
 
 router.get('/', function(req, res, next) {
   res.redirect(303, '/issue/'+latestIssue);
